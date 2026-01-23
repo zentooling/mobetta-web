@@ -1,0 +1,17 @@
+<div class="container mt-2 mb-2">
+{{ range $message := .Messages }}
+    {{ if eq $message.Type.String "error" }}
+<div class="alert alert-danger" role="alert">
+    {{ $message.Content }}
+</div>
+    {{ else if eq $message.Type.String "success" }}
+<div class="alert alert-success" role="alert">
+    {{ $message.Content }}
+</div>
+    {{ else }}
+<div class="alert alert-info" role="alert">
+    {{ $message.Content }}
+</div>
+    {{ end }}
+{{ end }}
+ </div>

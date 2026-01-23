@@ -1,0 +1,11 @@
+{{ template "header.gohtml" . }}
+
+<main class="flex-shrink-0">
+    <div class="container">
+<!--        <h1 class="mt-5">{{ call .Trans "Logger Set" }}</h1>-->
+
+        {{ template "messages.gohtml" . }}
+    </div>
+</main>
+
+{{ template "footer.gohtml" . }}

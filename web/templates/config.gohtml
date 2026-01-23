@@ -1,0 +1,91 @@
+{{- /*gotype: github.com/zentooling/golang-web-server/routes.ConfigPageData*/ -}}
+{{ template "header.gohtml" . }}
+
+
+<main class="flex-shrink-0">
+
+    {{ template "messages.gohtml" . }}
+
+    <div class="container">
+        <h1 class="mt-5">{{ call .Trans "Server Configuration" }}</h1>
+    </div>
+
+
+    <div class="container mt-5">
+        <h2 class="mb-4">{{ call .Trans "Logging Level" }} </h2>
+            <form class="row g-2 align-items-center" method="post" action="/loglevel">
+                <label class="form-label" for="log-select">Server Logging Level</label>
+                <div class="col-6">
+                    <select class="form-select" id="log-select" name="log-select">
+                        <option {{ if eq .LogLevel "DEBUG" }} selected {{ end }} value="DEBUG">Debug</option>
+                        <option {{ if eq .LogLevel "INFO" }} selected {{ end }} value="INFO">Info</option>
+                        <option {{ if eq .LogLevel "WARN" }} selected {{ end }} value="WARN">Warn</option>
+                        <option {{ if eq .LogLevel "ERROR" }} selected {{ end }} value="ERROR">Error</option>
+                    </select>
+                </div>
+
+                <div class="col-auto">
+                    <button class="btn btn-primary" type="submit">Set Level</button>
+                </div>
+            </form>
+    </div>
+
+    <div class="container-sm my-5">
+        <h2 class="mb-4">{{ call .Trans "Environment" }}</h2>
+        <form method="post" action="/config">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label for="f1">Server Base URL</label>
+                    <input name="base_url" id="f1" type="text" class="form-control" value="{{ .Config.BaseURL }}">
+                </div>
+                <div class="col">
+                    <label for="f2">SMTP Host</label>
+                    <input name="smtp_host" type="text" class="form-control" id="f2" value="{{ .Config.SMTPHost }}">
+                </div>
+            </div> <!-- row -->
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label for="f3">SMTP Port</label>
+                    <input name="smtp_port" type="text" class="form-control" id="f3" value="{{ .Config.SMTPPort }}">
+                </div>
+                <div class="col">
+                    <label for="f4">SMTP Sender</label>
+                    <input name="smtp_sender" type="text" class="form-control" id="f4" value="{{ .Config.SMTPSender }}">
+                </div>
+            </div> <!-- row -->
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label for="f5">SMTP Username</label>
+                    <input name="smtp_username" type="text" class="form-control" id="f5" value="{{ .Config.SMTPUsername }}">
+                </div>
+                <div class="col">
+                    <label for="f6">SMTP Password</label>
+                    <input name="smtp_password" type="password" class="form-control" id="f6" value="{{ .Config.SMTPPassword }}">
+                </div>
+            </div> <!-- row -->
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label for="f7">Request Per Minute</label>
+                    <input name="request_per_minute" type="text" class="form-control" id="f7" value="{{ .Config.RequestsPerMinute }}">
+                </div>
+                <div class="col">
+                    <label for="f8">Cache Parameter</label>
+                    <input name="cache_parameter" type="text" class="form-control" id="f8" value="{{ .Config.CacheParameter }}">
+                </div>
+            </div> <!-- row -->
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label for="f9">Cache Max Age</label>
+                    <input name="cache_max_age" type="text" class="form-control" id="f9" value="{{ .Config.CacheMaxAge }}">
+                </div>
+                <div class="col">
+                </div>
+            </div> <!-- row -->
+            <button type="submit" class="mb-5 btn btn-primary">Submit</button>
+
+        </form>
+    </div>
+
+</main>
+
+{{ template "footer.gohtml" . }}

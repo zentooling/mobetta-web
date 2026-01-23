@@ -1,0 +1,7 @@
+#!/bin/bash
+# Export variables
+export $(grep -v '^#' .env | xargs)
+
+# Verify
+echo "VAR1: $DATABASE_NAME"
+

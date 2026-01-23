@@ -1,0 +1,15 @@
+{{ template "header.gohtml" . }}
+
+<main class="flex-shrink-0">
+    <div class="container">
+        <h1 class="mt-5">{{ call .Trans "site_name" }}</h1>
+        <p class="lead">{{ call .Trans "A simple website with user login and registration." }} {{ call .Trans "The frontend uses" }} <a href="https://getbootstrap.com/docs/5.0/getting-started/introduction/">Bootstrap 5</a> {{ call .Trans "and the backend is written in" }} <a href="https://go.dev/">Go</a>.</p>
+        
+        <p>{{ call .Trans "Read more about this project on" }} <a href="https://github.com/zentooling/golang-web-server">GitHub</a>.</p>
+    </div>
+    <div class="container">
+         <button hx-get="/login" hx-swap="outerHTML">Click Me</button>
+    </div>
+</main>
+
+{{ template "footer.gohtml" . }}

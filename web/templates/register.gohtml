@@ -1,0 +1,24 @@
+{{ template "header.gohtml" . }}
+<main>
+    {{ template "messages.gohtml" . }}
+    <div class="container min-vh-100 d-flex justify-content-center align-items-top mt-5 text-wrap" style="width: 400px;">
+    <form method="post" action="/register">
+        <h1 class="h3 mb-3 fw-normal">{{ call .Trans "Register" }}</h1>
+
+        <div class="form-floating">
+            <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">{{ call .Trans "Email address" }}</label>
+        </div>
+        <div class="form-floating">
+            <input name="password" type="password" class="form-control" id="floatingPassword"
+                   placeholder="{{ call .Trans "Password" }}">
+            <label for="floatingPassword">{{ call .Trans "Password" }}</label>
+        </div>
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">{{ call .Trans "Register" }}</button>
+
+        <p class="mt-5 mb-3 text-muted"><a href="/activate/resend">{{ call .Trans "Request a new activation email" }}</a></p>
+    </form>
+    </div>
+</main>
+{{ template "footer.gohtml" . }}
