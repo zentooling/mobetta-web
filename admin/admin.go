@@ -1,3 +1,4 @@
+// Package admin manages the admin page which displays site info
 package admin
 
 import (

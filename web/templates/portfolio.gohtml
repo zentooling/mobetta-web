@@ -1,0 +1,75 @@
+{{ template "header.gohtml" . }}
+
+<main class="flex-shrink-0">
+
+    {{ template "messages.gohtml" . }}
+
+    <div class="container mt-5">
+        <h2 class="text-center">Stock Portfolio Dashboard</h2>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Value</h5>
+                        <p class="display-6 text-primary">$28,450</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Today's Change</h5>
+                        <p class="text-success">+2.3%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Portfolio Return</h5>
+                        <p class="text-primary">+14.7%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/*        <div id=chart-container class="h-100 d-flex align-items-center justify-content-center">*/}}
+        <div id=chart-container >
+
+            <!-- The go-echarts HTML includes its own <div> and <script> tags -->
+            {{ .Element }}
+            {{ .Script }}
+        </div>
+        <div class="mt-5">
+            <h3>My Holdings</h3>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Stock</th>
+                        <th>Shares</th>
+                        <th>Price</th>
+                        <th>Change</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Apple (AAPL)</td>
+                        <td>50</td>
+                        <td>$192.45</td>
+                        <td class="text-success">+1.2%</td>
+                    </tr>
+                    <tr>
+                        <td>Microsoft (MSFT)</td>
+                        <td>30</td>
+                        <td>$378.60</td>
+                        <td class="text-success">+0.8%</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+{{ template "footer.gohtml" . }}

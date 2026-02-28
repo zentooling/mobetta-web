@@ -12,6 +12,7 @@ type Config struct {
 	DatabaseName      string
 	DatabaseUsername  string
 	DatabasePassword  string
+	PortfolioXlsLoc   string
 	BaseURL           string
 	SMTPUsername      string
 	SMTPPassword      string
