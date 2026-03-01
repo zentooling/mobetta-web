@@ -1,6 +1,7 @@
 package infra
 
 import (
+	"errors"
 	"fmt"
 	"log/slog"
 	"time"
@@ -37,11 +38,15 @@ func attemptConnection(c *Config) (*gorm.DB, error) {
 	switch c.Database {
 	case "sqlite":
 		// In-memory sqlite if no database name is specified
-		dsn := "file::memory:?cache=shared"
+		// dsn := "file::memory:?cache=shared"
+		dsn := "/tmp/test.db"
 		if c.DatabaseName != "" {
 			dsn = fmt.Sprintf("%s.db", c.DatabaseName)
 		}
+		slog.Info("db init", "dsn", dsn)
+
 		db, err = gorm.Open(sqlite.Open(dsn), &gorm.Config{})
+
 	case "mysql":
 		dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", c.DatabaseUsername, c.DatabasePassword, c.DatabaseHost, c.DatabasePort, c.DatabaseName)
 		db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
@@ -56,7 +61,13 @@ func attemptConnection(c *Config) (*gorm.DB, error) {
 }
 
 func MigrateDatabase(db *gorm.DB) error {
-	err := db.AutoMigrate(&models.User{}, &models.Role{}, &models.Token{}, &models.Session{}, &models.Website{})
+	err := db.AutoMigrate(&models.User{},
+		&models.Role{},
+		&models.Token{},
+		&models.Session{},
+		&models.Website{},
+		// user defined tables
+		&models.Portfolio{})
 	seed(db)
 	return err
 }
@@ -77,7 +88,7 @@ func seed(db *gorm.DB) {
 	for _, role := range roles {
 		res := db.Where(&role).First(&role)
 		// If no record exists we insert
-		if res.Error != nil && res.Error == gorm.ErrRecordNotFound {
+		if res.Error != nil && errors.Is(res.Error, gorm.ErrRecordNotFound) {
 			db.Save(&role)
 		}
 	}
@@ -85,7 +96,7 @@ func seed(db *gorm.DB) {
 	// create admin account
 	adminRole := models.Role{}
 	res := db.Where("name='admin'").First(&adminRole)
-	if res.Error != nil && res.Error == gorm.ErrRecordNotFound {
+	if res.Error != nil && errors.Is(res.Error, gorm.ErrRecordNotFound) {
 		slog.Error("unable to find admin role")
 	}
 	// make the account active as of now
@@ -123,14 +134,9 @@ func seed(db *gorm.DB) {
 			URL:         "https://go.dev/learn/",
 		},
 		{
-			Title:       "Zentooling on Github",
+			Title:       "Zen tooling on Github",
 			Description: "I am the creator of Golang Base Project. This is my Github profile.",
 			URL:         "https://github.com/zentooling",
-		},
-		{
-			Title:       "Tournify",
-			Description: "A website to create tournaments or free which uses this project as a base.",
-			URL:         "https://tournify.io",
 		},
 		{
 			Title:       "GORM",
@@ -152,7 +158,7 @@ func seed(db *gorm.DB) {
 	for _, website := range websites {
 		res := db.Where(&website).First(&website)
 		// If no record exists we insert
-		if res.Error != nil && res.Error == gorm.ErrRecordNotFound {
+		if res.Error != nil && errors.Is(res.Error, gorm.ErrRecordNotFound) {
 			db.Save(&website)
 		}
 	}

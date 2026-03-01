@@ -40,7 +40,7 @@ func DefaultSessionWithOptions(c *gin.Context) sessions.Session {
 	// safari strictness requires the SameSite option below
 	session.Options(sessions.Options{
 		SameSite: http.SameSiteStrictMode,
-		MaxAge:   60, // one minute for testing purposes
+		MaxAge:   180, // 3 minutes
 	})
 	return session
 }

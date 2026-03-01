@@ -15,6 +15,7 @@ import (
 	"github.com/zentooling/golang-web-server/infra"
 	"github.com/zentooling/golang-web-server/login"
 	"github.com/zentooling/golang-web-server/middleware"
+	"github.com/zentooling/golang-web-server/portfolio"
 	"github.com/zentooling/golang-web-server/routes"
 )
 
@@ -109,6 +110,7 @@ func Run() {
 	loginSvc := login.NewService(ctx)
 	adminSvc := admin.NewService(ctx)
 	routeSvc := routes.NewService(ctx)
+	portfolioSvc := portfolio.NewService(ctx)
 
 	// Any request to / will call controller.Index
 	r.GET("/", routeSvc.Index)
@@ -140,7 +142,6 @@ func Run() {
 	noAuthPost := noAuth.Group("/")
 	noAuthPost.Use(middleware.Throttle(conf.RequestsPerMinute))
 
-	noAuthPost.POST("/loglevel", adminSvc.LoggingRouteHandlerPost)
 	noAuthPost.POST("/login", loginSvc.LoginPost)
 	noAuthPost.POST("/register", loginSvc.RegisterPost)
 	noAuthPost.POST("/activate/resend", loginSvc.ResendActivationPost)
@@ -154,6 +155,7 @@ func Run() {
 
 	adminGroup.GET("/config", adminSvc.ConfigRouteHandler)
 	adminGroup.POST("/config", adminSvc.ConfigRouteHandlerPost)
+	adminGroup.POST("/loglevel", adminSvc.LoggingRouteHandlerPost)
 	adminGroup.GET("/admin", adminSvc.Admin)
 	// We need to handle post from the login redirect
 	adminGroup.POST("/admin", adminSvc.Admin)
@@ -163,6 +165,7 @@ func Run() {
 	authGroup.Use(middleware.Auth())
 	authGroup.Use(middleware.Sensitive())
 	authGroup.GET("/logout", loginSvc.Logout)
+	authGroup.GET("/portfolio", portfolioSvc.ShowPortfolio)
 
 	// This starts our webserver, our application will not stop running or go past this point unless
 	// an error occurs or the web server is stopped for some reason. It is designed to run forever.

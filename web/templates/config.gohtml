@@ -1,4 +1,4 @@
-{{- /*gotype: github.com/zentooling/golang-web-server/routes.ConfigPageData*/ -}}
+{{- /*gotype: github.com/zentooling/golang-web-server/routes.ConfigPageData */ -}}
 {{ template "header.gohtml" . }}
 
 
@@ -79,6 +79,8 @@
                     <input name="cache_max_age" type="text" class="form-control" id="f9" value="{{ .Config.CacheMaxAge }}">
                 </div>
                 <div class="col">
+                    <label for="f10">XLS Location</label>
+                    <input name="xls_location" type="text" class="form-control" id="f8" value="{{ .Config.PortfolioXlsLoc }}">
                 </div>
             </div> <!-- row -->
             <button type="submit" class="mb-5 btn btn-primary">Submit</button>

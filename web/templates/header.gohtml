@@ -21,9 +21,12 @@
                             <a class="nav-link" href="/config">{{ call .Trans "Configuration" }}</a>
                         </li>
                     {{ end }}
-                    {{ if .IsAuthenticated }}
+                    {{ if or .IsAuthenticated .IsAdminRole  }}
                         <li class="nav-item">
                             <a class="nav-link" href="/logout">{{ call .Trans "Logout" }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/portfolio">{{ call .Trans "Portfolio" }}</a>
                         </li>
                     {{ end }}
                     {{ if not .IsAuthenticated }}

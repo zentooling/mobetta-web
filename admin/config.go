@@ -89,6 +89,12 @@ func (svc Service) ConfigRouteHandlerPost(c *gin.Context) {
 		prevCfg.SMTPSender = newValue
 		pd.AddMessage(routes.Success, pd.Trans("SMTP sender changed"))
 	}
+	newValue = c.PostForm("xls_location")
+	if newValue != prevCfg.PortfolioXlsLoc {
+		slog.Info("XLS Location", "newValue", newValue)
+		prevCfg.PortfolioXlsLoc = newValue
+		pd.AddMessage(routes.Success, pd.Trans("XLS Location changed"))
+	}
 	newValue = c.PostForm("smtp_username")
 	if newValue != prevCfg.SMTPUsername {
 		slog.Info("SMTPUsername", "newValue", newValue)
