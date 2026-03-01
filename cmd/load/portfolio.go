@@ -13,10 +13,12 @@ import (
 
 func main() {
 
+	conf := infra.LoadEnvVariables()
+
 	cwd, _ := os.Getwd()
 	slog.Info("Run Portfolio cwd: " + cwd)
 	// Create an instance of the reader by opening a target file
-	xl, err := xlsxreader.OpenFile("./portfolio.xlsx")
+	xl, err := xlsxreader.OpenFile(conf.PortfolioXlsLoc)
 	if err != nil {
 		slog.Error("Run", "error", err)
 		return
@@ -49,8 +51,6 @@ func main() {
 
 	// get db connection
 
-	conf := infra.LoadEnvVariables()
-
 	db, err := infra.ConnectToDatabase(conf)
 	if err != nil {
 		slog.Error("Run", "error", err)
@@ -66,6 +66,7 @@ func main() {
 }
 
 func insertRecords(db *gorm.DB, records []*models.Portfolio) {
+	slog.Info("insert portfolio records", "num_inserts", len(records))
 	result := db.Create(records) // pass a slice to insert multiple row
 
 	if result.Error != nil {
@@ -75,6 +76,7 @@ func insertRecords(db *gorm.DB, records []*models.Portfolio) {
 
 func deletePortfolioRecords(db *gorm.DB) {
 
+	slog.Info("in delete portfolio records")
 	db.Where("1 = 1").Delete(&models.Portfolio{})
 	// SQL: DELETE FROM portfolio WHERE 1 = 1;
 

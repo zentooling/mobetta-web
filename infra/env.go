@@ -100,6 +100,9 @@ func LoadEnvVariables() *Config {
 	if os.Getenv("SMTP_USERNAME") != "" {
 		c.SMTPUsername = os.Getenv("SMTP_USERNAME")
 	}
+	if os.Getenv("SMTP_SENDER") != "" {
+		c.SMTPSender = os.Getenv("SMTP_SENDER")
+	}
 	if os.Getenv("SMTP_PASSWORD") != "" {
 		c.SMTPPassword = os.Getenv("SMTP_PASSWORD")
 	}
@@ -109,8 +112,8 @@ func LoadEnvVariables() *Config {
 	if os.Getenv("SMTP_PORT") != "" {
 		c.SMTPPort = os.Getenv("SMTP_PORT")
 	}
-	if os.Getenv("SMTP_SENDER") != "" {
-		c.SMTPSender = os.Getenv("SMTP_SENDER")
+	if os.Getenv("PORTFOLIO_XLS_LOC") != "" {
+		c.PortfolioXlsLoc = os.Getenv("PORTFOLIO_XLS_LOC")
 	}
 
 	c.RequestsPerMinute = 5
