@@ -12,7 +12,6 @@ import (
 )
 
 func main() {
-
 	conf := infra.LoadEnvVariables()
 
 	cwd, _ := os.Getwd()
@@ -62,7 +61,6 @@ func main() {
 
 	// add new
 	insertRecords(db, records)
-
 }
 
 func insertRecords(db *gorm.DB, records []*models.Portfolio) {
@@ -75,49 +73,42 @@ func insertRecords(db *gorm.DB, records []*models.Portfolio) {
 }
 
 func deletePortfolioRecords(db *gorm.DB) {
-
 	slog.Info("in delete portfolio records")
 	db.Where("1 = 1").Delete(&models.Portfolio{})
 	// SQL: DELETE FROM portfolio WHERE 1 = 1;
-
 }
 
 func XlsToRecord(row xlsxreader.Row) *models.Portfolio {
-
 	ticker := row.Cells[1].Value
 
 	rank, err := strconv.ParseFloat(row.Cells[2].Value, 32)
 	if err != nil {
-		slog.Error("Error during conversion: %v\n", err)
+		slog.Error("XlsToRecord", "Error during conversion", err.Error())
 	}
 	clsPrice, err := strconv.ParseFloat(row.Cells[3].Value, 32)
 	if err != nil {
-		slog.Error("Error during conversion: %v\n", err)
+		slog.Error("XlsToRecord", "Error during conversion", err.Error())
 	}
 	volatility, err := strconv.ParseFloat(row.Cells[4].Value, 32)
 	if err != nil {
-		slog.Error("Error during conversion: %v\n", err)
+		slog.Error("XlsToRecord", "Error during conversion", err.Error())
 	}
-	clsGtMa := false
-	if row.Cells[5].Value == "1" {
-		clsGtMa = true
-	}
-	gap := false
-	if row.Cells[6].Value == "1" {
-		gap = true
-	}
+
+	clsGtMa := row.Cells[5].Value == "1"
+
+	gap := row.Cells[6].Value == "1"
 
 	pctAlloc, err := strconv.ParseFloat(row.Cells[7].Value, 32)
 	if err != nil {
-		slog.Error("Error during conversion: %v\n", err)
+		slog.Error("XlsToRecord", "Error during conversion", err.Error())
 	}
 	cost, err := strconv.ParseFloat(row.Cells[8].Value, 32)
 	if err != nil {
-		slog.Error("Error during conversion: %v\n", err)
+		slog.Error("XlsToRecord", "Error during conversion", err.Error())
 	}
 	numShares, err := strconv.ParseFloat(row.Cells[9].Value, 32)
 	if err != nil {
-		slog.Error("Error during conversion: %v\n", err)
+		slog.Error("XlsToRecord", "Error during conversion", err.Error())
 	}
 
 	return &models.Portfolio{
