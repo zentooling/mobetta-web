@@ -16,6 +16,7 @@ func main() {
 
 	cwd, _ := os.Getwd()
 	slog.Info("Run Portfolio cwd: " + cwd)
+	slog.Info("xls location: " + conf.PortfolioXlsLoc)
 	// Create an instance of the reader by opening a target file
 	xl, err := xlsxreader.OpenFile(conf.PortfolioXlsLoc)
 	if err != nil {

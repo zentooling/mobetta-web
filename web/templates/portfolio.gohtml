@@ -32,38 +32,44 @@
                 </div>
             </div>
         </div>
-        {{/*        <div id=chart-container class="h-100 d-flex align-items-center justify-content-center">*/}}
-        <div id=chart-container >
-
+        <div id=chart-container class="row mt-4">
             <!-- The go-echarts HTML includes its own <div> and <script> tags -->
             {{ .Element }}
             {{ .Script }}
+
         </div>
-        <div class="mt-5">
-            <h3>My Holdings</h3>
+
+        <div></div>
+
+        <div class="container mt-5">
+            <h3 class="text-center" >Holdings</h3>
+
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                     <tr>
                         <th>Stock</th>
-                        <th>Shares</th>
-                        <th>Price</th>
-                        <th>Change</th>
+                        <th>Rank</th>
+                        <th>Close</th>
+                        <th>Volatility</th>
+                        <th>Pct Alloc</th>
+                        <th>Num Shares</th>
+                        <th>Cost</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Apple (AAPL)</td>
-                        <td>50</td>
-                        <td>$192.45</td>
-                        <td class="text-success">+1.2%</td>
-                    </tr>
-                    <tr>
-                        <td>Microsoft (MSFT)</td>
-                        <td>30</td>
-                        <td>$378.60</td>
-                        <td class="text-success">+0.8%</td>
-                    </tr>
+                    {{range .Holdings}}
+                        <tr>
+                            <td>{{.Ticker}}</td>
+                            <td>{{ printf "%.2f"  .Rank}}</td>
+                            <td>{{ printf "$%.2f"  .Close}}</td>
+                            <td>{{ printf "%.4f"  .Volatility}}</td>
+                            <td>{{ printf "%.3f"  .PctAlloc}}</td>
+                            <td style="text-align: center">{{ printf "%.2f"  .NumShares}}</td>
+                            <td style="text-align: center">{{ printf "$%.2f" .Cost}}</td>
+                        </tr>
+                    {{end}}
+
                     </tbody>
                 </table>
             </div>
