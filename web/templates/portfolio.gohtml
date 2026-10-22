@@ -4,6 +4,7 @@
 
     {{ template "messages.gohtml" . }}
 
+
     <div class="container mt-5">
         <h2 class="text-center">Stock Portfolio Dashboard</h2>
         <div class="row mt-4">
@@ -32,15 +33,28 @@
                 </div>
             </div>
         </div>
-        <div id=chart-container class="row mt-4">
+        <div></div>
+
+        <div id=chart-container class="container row mt-5">
+            <h3 class="text-center" >Performance vs. Benchmark</h3>
             <!-- The go-echarts HTML includes its own <div> and <script> tags -->
             {{ .Element }}
             {{ .Script }}
 
+            <script type="text/javascript">
+
+                // lots of googling - but this actually resizes the chart responsively
+
+                const chartDom = document.getElementById('perf_chart'); // element named in the chart init options
+                const myChart = echarts.getInstanceByDom(chartDom) || echarts.init(chartDom);
+
+                const resizeObserver = new ResizeObserver(() => {
+                    myChart.resize();
+                });
+                resizeObserver.observe(chartDom);
+
+            </script>
         </div>
-
-        <div></div>
-
         <div class="container mt-5">
             <h3 class="text-center" >Holdings</h3>
 

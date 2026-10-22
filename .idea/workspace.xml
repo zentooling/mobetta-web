@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879bed11-4273-4112-873f-3a70f3ce8ba3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/portfolio/repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/load/portfolio.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/load/portfolio.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portfolio/portfolio.go" beforeDir="false" afterPath="$PROJECT_DIR$/portfolio/portfolio.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/templates/portfolio.gohtml" beforeDir="false" afterPath="$PROJECT_DIR$/web/templates/portfolio.gohtml" afterDir="false" />
-    </list>
+    <list default="true" id="879bed11-4273-4112-873f-3a70f3ce8ba3" name="Changes" comment="added responsive performance chart which looks pretty decent" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -146,6 +141,10 @@
   <component name="UnknownFeatures">
     <option featureType="dependencySupport" implementationName="javascript:npm:webpack" />
     <option featureType="dependencySupport" implementationName="javascript:npm:postcss" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added responsive performance chart which looks pretty decent" />
+    <option name="LAST_COMMIT_MESSAGE" value="added responsive performance chart which looks pretty decent" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/mobetta_web$go_build_github_com_zentooling_golang_web_server_cmd_load.out" NAME="go build github.com/zentooling/golang-web-server/cmd/load Coverage Results" MODIFIED="1789589409194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
