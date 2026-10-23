@@ -10,6 +10,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	email2 "github.com/zentooling/golang-web-server/email"
+	"github.com/zentooling/golang-web-server/infra"
 	"github.com/zentooling/golang-web-server/models"
 	"github.com/zentooling/golang-web-server/routes"
 	"github.com/zentooling/golang-web-server/ulid"
@@ -18,17 +19,17 @@ import (
 
 // ForgotPassword renders the HTML page where a password request can be initiated
 func (svc Service) ForgotPassword(c *gin.Context) {
-	pd := routes.DefaultPageData(c, svc.env.GetBundle(), svc.env.GetConfig().CacheParameter)
+	pd := routes.DefaultPageData(c)
 	pd.Title = pd.Trans("Forgot Password")
 	c.HTML(http.StatusOK, "forgotpassword.gohtml", pd)
 }
 
 // ForgotPasswordPost handles the POST request which requests a password reset and then renders the HTML page with the appropriate message
 func (svc Service) ForgotPasswordPost(c *gin.Context) {
-	pd := routes.DefaultPageData(c, svc.env.GetBundle(), svc.env.GetConfig().CacheParameter)
+	pd := routes.DefaultPageData(c)
 	pd.Title = pd.Trans("Forgot Password")
 
-	db := svc.env.GetDb()
+	db := svc.db
 
 	email := c.PostForm("email")
 	user := models.User{Email: email}
@@ -48,7 +49,7 @@ func (svc Service) forgotPasswordEmailHandler(userID uint, email string, trans f
 		Type:  models.TokenPasswordReset,
 	}
 
-	db := svc.env.GetDb()
+	db := svc.db
 
 	res := db.Where(&forgotPasswordToken).First(&forgotPasswordToken)
 	if (res.Error != nil && res.Error != gorm.ErrRecordNotFound) || res.RowsAffected > 0 {
@@ -71,7 +72,7 @@ func (svc Service) forgotPasswordEmailHandler(userID uint, email string, trans f
 }
 
 func (svc Service) sendForgotPasswordEmail(token string, email string, trans func(string) string) {
-	conf := svc.env.GetConfig()
+	conf := infra.LoadEnvVariables()
 	u, err := url.Parse(conf.BaseURL)
 	if err != nil {
 		slog.Error("sendForgetPasswordEmail", "error", err)

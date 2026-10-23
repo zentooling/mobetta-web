@@ -8,7 +8,6 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/zentooling/golang-web-server/infra"
 	"github.com/zentooling/golang-web-server/models"
 )
 
@@ -24,8 +23,7 @@ type SearchData struct {
 
 // Search renders the search HTML page and any search results
 func (svc Service) Search(c *gin.Context) {
-	cfg := svc.env
-	pdS := DefaultPageData(c, cfg.GetBundle(), cfg.GetConfig().CacheParameter)
+	pdS := DefaultPageData(c)
 	page := 1
 	resultsPerPage := 5
 	pdS.Title = pdS.Trans("Search")
@@ -51,7 +49,7 @@ func (svc Service) Search(c *gin.Context) {
 	search2 := fmt.Sprintf("%s%s", "%", search)
 	search4 := fmt.Sprintf("%s%s", search, "%")
 
-	db := infra.LairInstance().GetDb()
+	db := svc.db
 
 	res := db.
 		Raw(fmt.Sprintf("SELECT * FROM websites WHERE title LIKE ? OR description LIKE ? ORDER BY CASE WHEN title LIKE ? OR description LIKE ? THEN 1 WHEN title LIKE ? OR description LIKE ? THEN 2 WHEN title LIKE ? OR description LIKE ? THEN 4 ELSE 3 END LIMIT %d OFFSET %d", resultsPerPage, resultsPerPage*(page-1)), searchFilter, searchFilter, search, search, search2, search2, search4, search4).

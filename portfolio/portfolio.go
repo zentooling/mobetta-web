@@ -6,21 +6,19 @@ import (
 	"errors"
 	"fmt"
 	"html/template"
-	"log/slog"
 	"net/http"
-	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-echarts/go-echarts/v2/charts"
 	"github.com/go-echarts/go-echarts/v2/opts"
 	"github.com/go-echarts/go-echarts/v2/types"
-	"github.com/zentooling/golang-web-server/infra"
 	"github.com/zentooling/golang-web-server/models"
 	"github.com/zentooling/golang-web-server/routes"
+	"gorm.io/gorm"
 )
 
 type Service struct {
-	env infra.ILair
+	db *gorm.DB
 }
 
 type PortfolioData struct {
@@ -31,13 +29,13 @@ type PortfolioData struct {
 	Element template.HTML
 }
 
-func NewService(env infra.ILair) *Service {
-	return &Service{env: env}
+func NewService(db *gorm.DB) *Service {
+	return &Service{db: db}
 }
 
 // ShowPortfolio Display current portfolio and performance
 func (svc Service) ShowPortfolio(c *gin.Context) {
-	pd := routes.DefaultPageData(c, svc.env.GetBundle(), svc.env.GetConfig().CacheParameter)
+	pd := routes.DefaultPageData(c)
 	snippet := portfolioPerfChart().RenderSnippet()
 
 	element := snippet.Element
@@ -48,19 +46,13 @@ func (svc Service) ShowPortfolio(c *gin.Context) {
 	fmt.Printf("script %s\n", script)
 	fmt.Printf("option %s\n", option)
 
-	conf := infra.LairInstance().GetConfig()
-
-	db, err := infra.ConnectToDatabase(conf)
-	if err != nil {
-		slog.Error("Run", "error", err)
-		os.Exit(2)
-	}
+	db := svc.db
 
 	repo := NewHoldingsRepository(db)
 
 	ctxt := context.Background()
 
-	holdings, err := repo.GetAll(ctxt)
+	holdings, _ := repo.GetAll(ctxt)
 
 	pd.Title = pd.Trans("Portfolio")
 	portfolioData := PortfolioData{

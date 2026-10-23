@@ -12,6 +12,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	email2 "github.com/zentooling/golang-web-server/email"
+	"github.com/zentooling/golang-web-server/infra"
 	"github.com/zentooling/golang-web-server/models"
 	"github.com/zentooling/golang-web-server/routes"
 	"github.com/zentooling/golang-web-server/ulid"
@@ -21,14 +22,14 @@ import (
 
 // Register renders the HTML content of the register page
 func (svc Service) Register(c *gin.Context) {
-	pd := routes.DefaultPageData(c, svc.env.GetBundle(), svc.env.GetConfig().CacheParameter)
+	pd := routes.DefaultPageData(c)
 	pd.Title = pd.Trans("Register")
 	c.HTML(http.StatusOK, "register.gohtml", pd)
 }
 
 // RegisterPost handles requests to register users and returns appropriate messages as HTML content
 func (svc Service) RegisterPost(c *gin.Context) {
-	pd := routes.DefaultPageData(c, svc.env.GetBundle(), svc.env.GetConfig().CacheParameter)
+	pd := routes.DefaultPageData(c)
 	passwordError := pd.Trans("Your password must be 8 characters in length or longer")
 	registerError := pd.Trans("Could not register, please make sure the details you have provided are correct and that you do not already have an existing account.")
 	registerSuccess := pd.Trans("Thank you for registering. An activation email has been sent with steps describing how to activate your account.")
@@ -65,7 +66,7 @@ func (svc Service) RegisterPost(c *gin.Context) {
 	user := models.User{Email: email}
 	role := models.Role{}
 
-	db := svc.env.GetDb()
+	db := svc.db
 
 	// retrieve the 'user' role
 	res := db.Where("name='user'").First(&role)
@@ -110,7 +111,7 @@ func (svc Service) activationEmailHandler(userID uint, email string, trans func(
 		Type:  models.TokenUserActivation,
 	}
 
-	db := svc.env.GetDb()
+	db := svc.db
 
 	res := db.Where(&activationToken).First(&activationToken)
 	if (res.Error != nil && res.Error != gorm.ErrRecordNotFound) || res.RowsAffected > 0 {
@@ -132,7 +133,7 @@ func (svc Service) activationEmailHandler(userID uint, email string, trans func(
 }
 
 func (svc Service) sendActivationEmail(token string, email string, trans func(string) string) {
-	cfg := svc.env.GetConfig()
+	cfg := infra.LoadEnvVariables()
 	u, err := url.Parse(cfg.BaseURL)
 	if err != nil {
 		slog.Error("activationEmailHandler:sendActivationEmail", "error", err)

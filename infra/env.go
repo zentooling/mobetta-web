@@ -6,52 +6,45 @@ import (
 	"strconv"
 
 	"github.com/gorilla/securecookie"
-	"github.com/nicksnyder/go-i18n/v2/i18n"
 	"github.com/zentooling/golang-web-server/text"
 	"gorm.io/gorm"
 )
 
 // TODO use proper singleton here
 // global access to app wide cfg
-var glair Lair
+var GlobalLair Lair
 
 // Config defines all the configuration variables for the golang-base-project
 
 func LairInstance() ILair {
-	return glair
+	return GlobalLair
 }
 
 // make an interface so cfg can be mocked for testing
 type ILair interface {
-	GetDb() *gorm.DB
-	GetConfig() *Config
-	GetBundle() *i18n.Bundle
+	//GetDb() *gorm.DB
 	GetLoggingLevel() *slog.LevelVar
 }
 
 // implement the interface
 func (l Lair) GetDb() *gorm.DB                 { return l.db }
-func (l Lair) GetConfig() *Config              { return l.config }
-func (l Lair) GetBundle() *i18n.Bundle         { return l.bundle }
 func (l Lair) GetLoggingLevel() *slog.LevelVar { return l.leveler }
 
-func InitLair(db *gorm.DB, config *Config, bundle *i18n.Bundle, levelVar *slog.LevelVar) ILair {
+func InitLair(db *gorm.DB, Config *Config, levelVar *slog.LevelVar) ILair {
 	// set the global - should be called once at startup
-	glair = Lair{
+	GlobalLair = Lair{
 		db:      db,
-		config:  config,
-		bundle:  bundle,
+		Config:  Config, // TODO fix global config mess
 		leveler: levelVar,
 	}
-	return glair
+	return GlobalLair
 
 }
 
 // Lair contains application wide values built based on configuration settings
 type Lair struct {
 	db      *gorm.DB
-	config  *Config
-	bundle  *i18n.Bundle
+	Config  *Config
 	leveler *slog.LevelVar
 }
 

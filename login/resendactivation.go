@@ -11,15 +11,15 @@ import (
 
 // ResendActivation renders the HTML page used to request a new activation email
 func (svc Service) ResendActivation(c *gin.Context) {
-	pd := routes.DefaultPageData(c, svc.env.GetBundle(), svc.env.GetConfig().CacheParameter)
+	pd := routes.DefaultPageData(c)
 	pd.Title = pd.Trans("Resend Activation Email")
 	c.HTML(http.StatusOK, "resendactivation.gohtml", pd)
 }
 
 // ResendActivationPost handles the post request for requesting a new activation email
 func (svc Service) ResendActivationPost(c *gin.Context) {
-	pd := routes.DefaultPageData(c, svc.env.GetBundle(), svc.env.GetConfig().CacheParameter)
-	db := svc.env.GetDb()
+	pd := routes.DefaultPageData(c)
+	db := svc.db
 	pd.Title = pd.Trans("Resend Activation Email")
 	email := c.PostForm("email")
 	user := models.User{Email: email}

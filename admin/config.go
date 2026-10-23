@@ -18,9 +18,9 @@ type ConfigPageData struct {
 
 func (svc Service) pageData(c *gin.Context) *ConfigPageData {
 	return &ConfigPageData{
-		PageData: routes.DefaultPageData(c, svc.env.GetBundle(), svc.env.GetConfig().CacheParameter),
-		Config:   svc.env.GetConfig(),
-		LogLevel: svc.env.GetLoggingLevel().Level().String(),
+		PageData: routes.DefaultPageData(c),
+		LogLevel: infra.LairInstance().GetLoggingLevel().Level().String(),
+		Config:   infra.GlobalLair.Config,
 	}
 }
 func (svc Service) ConfigRouteHandler(c *gin.Context) {
@@ -42,7 +42,7 @@ func (svc Service) LoggingRouteHandlerPost(c *gin.Context) {
 
 	// update logging level
 	if err == nil {
-		svc.env.GetLoggingLevel().Set(level)
+		infra.LairInstance().GetLoggingLevel().Set(level)
 	}
 
 	slog.Error("set logging level to " + levelStr)
@@ -63,7 +63,7 @@ func (svc Service) ConfigRouteHandlerPost(c *gin.Context) {
 	pd := svc.pageData(c)
 	pd.Title = pd.Trans("Configuration")
 	// this points to config struct so changes are 'persistent'
-	prevCfg := svc.env.GetConfig()
+	prevCfg := pd.Config
 
 	newValue := c.PostForm("base_url")
 	if newValue != prevCfg.BaseURL {
@@ -75,6 +75,7 @@ func (svc Service) ConfigRouteHandlerPost(c *gin.Context) {
 	if newValue != prevCfg.SMTPHost {
 		slog.Info("SmtpHost", "newValue", newValue)
 		prevCfg.SMTPHost = newValue
+
 		pd.AddMessage(routes.Success, pd.Trans("SMTP host changed"))
 	}
 	newValue = c.PostForm("smtp_port")

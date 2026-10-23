@@ -19,7 +19,7 @@ type ResetPasswordPageData struct {
 // ResetPassword renders the HTML page for resetting the users password
 func (svc Service) ResetPassword(c *gin.Context) {
 	token := c.Param("token")
-	pdPre := routes.DefaultPageData(c, svc.env.GetBundle(), svc.env.GetConfig().CacheParameter)
+	pdPre := routes.DefaultPageData(c)
 	pdPre.Title = pdPre.Trans("Reset Password")
 	pd := ResetPasswordPageData{
 		PageData: pdPre,
@@ -30,7 +30,7 @@ func (svc Service) ResetPassword(c *gin.Context) {
 
 // ResetPasswordPost handles post request used to reset users passwords
 func (svc Service) ResetPasswordPost(c *gin.Context) {
-	pdPre := routes.DefaultPageData(c, svc.env.GetBundle(), svc.env.GetConfig().CacheParameter)
+	pdPre := routes.DefaultPageData(c)
 	passwordError := pdPre.Trans("Your password must be 8 characters in length or longer")
 	resetError := pdPre.Trans("Could not reset password, please try again")
 
@@ -53,7 +53,7 @@ func (svc Service) ResetPasswordPost(c *gin.Context) {
 		Type:  models.TokenPasswordReset,
 	}
 
-	db := svc.env.GetDb()
+	db := svc.db
 
 	res := db.Where(&forgotPasswordToken).First(&forgotPasswordToken)
 	if res.Error != nil {

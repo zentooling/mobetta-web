@@ -7,37 +7,39 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/zentooling/golang-web-server/infra"
 	"github.com/zentooling/golang-web-server/middleware"
 	"github.com/zentooling/golang-web-server/models"
 	"github.com/zentooling/golang-web-server/routes"
 	"github.com/zentooling/golang-web-server/ulid"
 	"golang.org/x/crypto/bcrypt"
+	"gorm.io/gorm"
 )
 
 type Service struct {
-	env infra.ILair
+	db *gorm.DB
 }
 
-func NewService(env infra.ILair) *Service {
-	return &Service{env: env}
+func NewService(db *gorm.DB) *Service {
+	return &Service{
+		db: db,
+	}
 }
 
 // Login renders the HTML of the login page
 func (svc Service) Login(c *gin.Context) {
-	pd := routes.DefaultPageData(c, svc.env.GetBundle(), svc.env.GetConfig().CacheParameter)
+	pd := routes.DefaultPageData(c)
 	pd.Title = pd.Trans("Login")
 	c.HTML(http.StatusOK, "login.gohtml", pd)
 }
 
 // LoginPost handles login requests and returns the appropriate HTML and messages
 func (svc Service) LoginPost(c *gin.Context) {
-	pd := routes.DefaultPageData(c, svc.env.GetBundle(), svc.env.GetConfig().CacheParameter)
+	pd := routes.DefaultPageData(c)
 	pd.Title = pd.Trans("Login")
 
 	loginError := pd.Trans("Could not login, please make sure that you have typed in the correct email and password. If you have forgotten your password, please click the forgot password link below.")
 
-	db := svc.env.GetDb()
+	db := svc.db
 
 	email := c.PostForm("email")
 

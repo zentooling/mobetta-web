@@ -13,7 +13,7 @@ import (
 // Activate handles requests used to activate a users account
 func (svc Service) Activate(c *gin.Context) {
 
-	pd := routes.DefaultPageData(c, svc.env.GetBundle(), svc.env.GetConfig().CacheParameter)
+	pd := routes.DefaultPageData(c)
 	activationError := pd.Trans("Please provide a valid activation token")
 	activationSuccess := pd.Trans("Account activated. You may now proceed to login to your account.")
 	pd.Title = pd.Trans("Activate")
@@ -23,7 +23,7 @@ func (svc Service) Activate(c *gin.Context) {
 		Type:  models.TokenUserActivation,
 	}
 
-	db := svc.env.GetDb()
+	db := svc.db
 
 	res := db.Where(&activationToken).First(&activationToken)
 	if res.Error != nil {

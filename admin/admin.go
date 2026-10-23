@@ -10,18 +10,17 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/zentooling/golang-web-server/infra"
 	"github.com/zentooling/golang-web-server/models"
 	"github.com/zentooling/golang-web-server/routes"
 	"gorm.io/gorm"
 )
 
 type Service struct {
-	env infra.ILair
+	db *gorm.DB
 }
 
-func NewService(env infra.ILair) *Service {
-	return &Service{env: env}
+func NewService(db *gorm.DB) *Service {
+	return &Service{db: db}
 }
 
 type AdminData struct {
@@ -52,7 +51,7 @@ type MonthlySignUps struct {
 
 // Admin renders the admin dashboard
 func (svc Service) Admin(c *gin.Context) {
-	pd := routes.DefaultPageData(c, svc.env.GetBundle(), svc.env.GetConfig().CacheParameter)
+	pd := routes.DefaultPageData(c)
 	pd.Title = pd.Trans("Admin")
 
 	ad := AdminData{
@@ -64,7 +63,7 @@ func (svc Service) Admin(c *gin.Context) {
 		},
 	}
 
-	db := infra.LairInstance().GetDb()
+	db := svc.db
 
 	var msu []MonthlySignUps
 

@@ -3,8 +3,9 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/nicksnyder/go-i18n/v2/i18n"
-	"github.com/zentooling/golang-web-server/infra"
+	"gorm.io/gorm"
+
+	// "github.com/zentooling/golang-web-server/infra"
 
 	"github.com/zentooling/golang-web-server/middleware"
 )
@@ -84,24 +85,26 @@ func getUserId(c *gin.Context) uint {
 	return 0
 }
 
-func DefaultPageData(c *gin.Context, bundle *i18n.Bundle, cacheParameter string) PageData {
-	langService := infra.NewLangService(c, bundle)
+func DefaultPageData(c *gin.Context) PageData {
+	// TODO make this a singleton
+	bundle := LoadLanguageBundles()
+	langService := NewLangService(c, bundle)
 	return PageData{
 		Title:           "Home",
 		Messages:        nil,
 		IsAuthenticated: isAuthenticated(c),
 		IsAdminRole:     isAdminRole(c),
-		CacheParameter:  cacheParameter,
+		CacheParameter:  "jtFkffdefsdfcMVx", // TODO make this dynamic?
 		Trans:           langService.Trans,
 	}
 }
 
 type Service struct {
-	env infra.ILair
+	db *gorm.DB
 }
 
-func NewService(env infra.ILair) *Service {
+func NewService(db *gorm.DB) *Service {
 	return &Service{
-		env: env,
+		db: db,
 	}
 }

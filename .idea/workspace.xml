@@ -4,7 +4,27 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879bed11-4273-4112-873f-3a70f3ce8ba3" name="Changes" comment="added responsive performance chart which looks pretty decent" />
+    <list default="true" id="879bed11-4273-4112-873f-3a70f3ce8ba3" name="Changes" comment="added responsive performance chart which looks pretty decent">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/admin.go" beforeDir="false" afterPath="$PROJECT_DIR$/admin/admin.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/admin/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/infra/database.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/env.go" beforeDir="false" afterPath="$PROJECT_DIR$/infra/env.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/lang.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/lang.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/messages.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/messages.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/activate.go" beforeDir="false" afterPath="$PROJECT_DIR$/login/activate.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/forgotpassword.go" beforeDir="false" afterPath="$PROJECT_DIR$/login/forgotpassword.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/login.go" beforeDir="false" afterPath="$PROJECT_DIR$/login/login.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/register.go" beforeDir="false" afterPath="$PROJECT_DIR$/login/register.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/resendactivation.go" beforeDir="false" afterPath="$PROJECT_DIR$/login/resendactivation.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/resetpassword.go" beforeDir="false" afterPath="$PROJECT_DIR$/login/resetpassword.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/portfolio.go" beforeDir="false" afterPath="$PROJECT_DIR$/portfolio/portfolio.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/index.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/noroute.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/noroute.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routes.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/search.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/search.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.go" beforeDir="false" afterPath="$PROJECT_DIR$/run.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,6 +77,14 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="GoMoveDeclarationDialog.RECENT_KEY">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/routes/" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
@@ -69,7 +97,6 @@
           <value>
             <map>
               <entry key="go build github.com/zentooling/golang-web-server/cmd/base" value="STOPPED" />
-              <entry key="go build github.com/zentooling/golang-web-server/cmd/load" value="STOPPED" />
             </map>
           </value>
         </entry>
