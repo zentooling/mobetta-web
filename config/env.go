@@ -1,4 +1,4 @@
-package infra
+package config
 
 import (
 	"log/slog"
@@ -7,48 +7,11 @@ import (
 
 	"github.com/gorilla/securecookie"
 	"github.com/zentooling/golang-web-server/text"
-	"gorm.io/gorm"
 )
 
-// TODO use proper singleton here
-// global access to app wide cfg
-var GlobalLair Lair
+var GlobalConfig *Config
 
-// Config defines all the configuration variables for the golang-base-project
-
-func LairInstance() ILair {
-	return GlobalLair
-}
-
-// make an interface so cfg can be mocked for testing
-type ILair interface {
-	//GetDb() *gorm.DB
-	GetLoggingLevel() *slog.LevelVar
-}
-
-// implement the interface
-func (l Lair) GetDb() *gorm.DB                 { return l.db }
-func (l Lair) GetLoggingLevel() *slog.LevelVar { return l.leveler }
-
-func InitLair(db *gorm.DB, Config *Config, levelVar *slog.LevelVar) ILair {
-	// set the global - should be called once at startup
-	GlobalLair = Lair{
-		db:      db,
-		Config:  Config, // TODO fix global config mess
-		leveler: levelVar,
-	}
-	return GlobalLair
-
-}
-
-// Lair contains application wide values built based on configuration settings
-type Lair struct {
-	db      *gorm.DB
-	Config  *Config
-	leveler *slog.LevelVar
-}
-
-func LoadEnvVariables() *Config {
+func Initialize() *Config {
 	var c Config
 	c.LogLevel = "DEBUG"
 	if os.Getenv("LOG_LEVEL") != "" {
@@ -134,5 +97,6 @@ func LoadEnvVariables() *Config {
 		c.CacheMaxAge = i
 	}
 
+	GlobalConfig = &c
 	return &c
 }

@@ -14,7 +14,9 @@ import (
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 	"github.com/zentooling/golang-web-server/admin"
-	"github.com/zentooling/golang-web-server/infra"
+	"github.com/zentooling/golang-web-server/config"
+	"github.com/zentooling/golang-web-server/database"
+	"github.com/zentooling/golang-web-server/logging"
 	"github.com/zentooling/golang-web-server/login"
 	"github.com/zentooling/golang-web-server/middleware"
 	"github.com/zentooling/golang-web-server/models"
@@ -33,20 +35,16 @@ var staticFS embed.FS
 func Run() {
 
 	// We load environment variables, these are only read when the application launches
-	conf := infra.LoadEnvVariables()
+	conf := config.Initialize()
 
-	// Init Logging and save leg level var - configurable at runtime on config page
-	logLevelVar := infra.InitLogging(conf)
+	logging.Initialize(conf.LogLevel)
 
 	// We connect to the database using the configuration generated from the environment variables.
-	db, err := infra.ConnectToDatabase(conf)
+	db, err := database.Initialize(conf)
 	if err != nil {
 		slog.Error("Run", "error", err)
 		os.Exit(2)
 	}
-
-	// set global app-wide cfg parms
-	infra.InitLair(db, conf, logLevelVar)
 
 	// Once a database connection is established we run any needed migrations
 	err = MigrateDatabase(db)
@@ -99,7 +97,7 @@ func Run() {
 	// This middleware sets the Cache-Control header and is applied to the assets group only
 	assets.Use(middleware.Cache(conf.CacheMaxAge))
 
-	// All requests to /assets will use the sub fil system which contains all our static assets
+	// All requests to /assets will use the sub file system which contains all our static assets
 	assets.StaticFS("/", http.FS(subFS))
 
 	// Session middleware is applied to all groups after this point.
@@ -184,7 +182,7 @@ func MigrateDatabase(db *gorm.DB) error {
 		&models.Session{},
 		&models.Website{},
 		// user defined tables
-		&models.Portfolio{})
+		&portfolio.Portfolio{})
 	seed(db)
 	return err
 }

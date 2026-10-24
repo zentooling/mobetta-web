@@ -6,28 +6,29 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/zentooling/golang-web-server/infra"
+	"github.com/zentooling/golang-web-server/config"
+	"github.com/zentooling/golang-web-server/logging"
 	"github.com/zentooling/golang-web-server/routes"
 )
 
 type ConfigPageData struct {
 	routes.PageData
-	Config   *infra.Config
+	Config   *config.Config
 	LogLevel string
 }
 
 func (svc Service) pageData(c *gin.Context) *ConfigPageData {
 	return &ConfigPageData{
 		PageData: routes.DefaultPageData(c),
-		LogLevel: infra.LairInstance().GetLoggingLevel().Level().String(),
-		Config:   infra.GlobalLair.Config,
+		LogLevel: logging.GetLoggingLevel().String(),
+		Config:   config.GlobalConfig,
 	}
 }
 func (svc Service) ConfigRouteHandler(c *gin.Context) {
 	pd := svc.pageData(c)
 	pd.Title = pd.Trans("Configuration")
 
-	currentLevel := infra.LairInstance().GetLoggingLevel()
+	currentLevel := logging.GetLoggingLevel()
 	slog.Error("ConfigRouteHandler", "current logging Level", currentLevel)
 
 	c.HTML(http.StatusOK, "config.gohtml", pd)
@@ -38,17 +39,13 @@ func (svc Service) LoggingRouteHandlerPost(c *gin.Context) {
 
 	levelStr := c.PostForm("log-select")
 
-	level, err := infra.StringToLevel(levelStr)
+	logging.SetLoggingLevel(levelStr)
 
-	// update logging level
-	if err == nil {
-		infra.LairInstance().GetLoggingLevel().Set(level)
-	}
-
-	slog.Error("set logging level to " + levelStr)
-	slog.Warn("set logging level to " + levelStr)
-	slog.Info("set logging level to " + levelStr)
-	slog.Debug("set logging level to " + levelStr)
+	// now log at each level - results can be verified in log file
+	slog.Error("test msg: set logging level to " + levelStr)
+	slog.Warn("test msg: set logging level to " + levelStr)
+	slog.Info("test msg: set logging level to " + levelStr)
+	slog.Debug("test msg: set logging level to " + levelStr)
 
 	// read updated state
 	pd := svc.pageData(c)
@@ -136,7 +133,7 @@ func (svc Service) ConfigRouteHandlerPost(c *gin.Context) {
 	}
 
 	// refresh with new state
-	// pd.Config = infra.LairInstance().GetConfig()
+	// pd.Config = database.LairInstance().GetConfig()
 
 	c.HTML(http.StatusOK, "config.gohtml", pd)
 }

@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/zentooling/golang-web-server/config"
 	email2 "github.com/zentooling/golang-web-server/email"
-	"github.com/zentooling/golang-web-server/infra"
 	"github.com/zentooling/golang-web-server/models"
 	"github.com/zentooling/golang-web-server/routes"
 	"github.com/zentooling/golang-web-server/ulid"
@@ -72,7 +72,7 @@ func (svc Service) forgotPasswordEmailHandler(userID uint, email string, trans f
 }
 
 func (svc Service) sendForgotPasswordEmail(token string, email string, trans func(string) string) {
-	conf := infra.LoadEnvVariables()
+	conf := config.Initialize()
 	u, err := url.Parse(conf.BaseURL)
 	if err != nil {
 		slog.Error("sendForgetPasswordEmail", "error", err)

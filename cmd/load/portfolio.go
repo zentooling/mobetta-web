@@ -6,13 +6,14 @@ import (
 	"strconv"
 
 	"github.com/thedatashed/xlsxreader"
-	"github.com/zentooling/golang-web-server/infra"
-	"github.com/zentooling/golang-web-server/models"
+	"github.com/zentooling/golang-web-server/config"
+	"github.com/zentooling/golang-web-server/database"
+	"github.com/zentooling/golang-web-server/portfolio"
 	"gorm.io/gorm"
 )
 
 func main() {
-	conf := infra.LoadEnvVariables()
+	conf := config.Initialize()
 
 	cwd, _ := os.Getwd()
 	slog.Info("Run Portfolio cwd: " + cwd)
@@ -31,7 +32,7 @@ func main() {
 		}
 	}(xl)
 
-	records := make([]*models.Portfolio, 0)
+	records := make([]*portfolio.Portfolio, 0)
 
 	// Iterate on the rows of data
 	for row := range xl.ReadRows(xl.Sheets[0]) {
@@ -49,9 +50,9 @@ func main() {
 		records = append(records, XlsToRecord(row))
 	}
 
-	// get db connection
+	// get database connection
 
-	db, err := infra.ConnectToDatabase(conf)
+	db, err := database.Initialize(conf)
 	if err != nil {
 		slog.Error("Run", "error", err)
 		os.Exit(2)
@@ -64,7 +65,7 @@ func main() {
 	insertRecords(db, records)
 }
 
-func insertRecords(db *gorm.DB, records []*models.Portfolio) {
+func insertRecords(db *gorm.DB, records []*portfolio.Portfolio) {
 	slog.Info("insert portfolio records", "num_inserts", len(records))
 	result := db.Create(records) // pass a slice to insert multiple row
 
@@ -75,11 +76,11 @@ func insertRecords(db *gorm.DB, records []*models.Portfolio) {
 
 func deletePortfolioRecords(db *gorm.DB) {
 	slog.Info("in delete portfolio records")
-	db.Where("1 = 1").Delete(&models.Portfolio{})
+	db.Where("1 = 1").Delete(&portfolio.Portfolio{})
 	// SQL: DELETE FROM portfolio WHERE 1 = 1;
 }
 
-func XlsToRecord(row xlsxreader.Row) *models.Portfolio {
+func XlsToRecord(row xlsxreader.Row) *portfolio.Portfolio {
 	ticker := row.Cells[1].Value
 
 	rank, err := strconv.ParseFloat(row.Cells[2].Value, 32)
@@ -112,7 +113,7 @@ func XlsToRecord(row xlsxreader.Row) *models.Portfolio {
 		slog.Error("XlsToRecord", "Error during conversion", err.Error())
 	}
 
-	return &models.Portfolio{
+	return &portfolio.Portfolio{
 		Ticker:       ticker,
 		Rank:         rank,
 		Close:        clsPrice,

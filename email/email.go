@@ -9,17 +9,17 @@ import (
 	"net/smtp"
 	"strings"
 
-	"github.com/zentooling/golang-web-server/infra"
+	"github.com/zentooling/golang-web-server/config"
 	"github.com/zentooling/golang-web-server/text"
 )
 
-// Service holds a golang-base-project infra.Config and provides functions to send emails
+// Service holds a golang-base-project database.Config and provides functions to send emails
 type Service struct {
-	Config *infra.Config
+	Config *config.Config
 }
 
-// New takes a golang-base-project infra.Config and returns an instance of Service
-func New(c *infra.Config) Service {
+// New takes a golang-base-project database.Config and returns an instance of Service
+func New(c *config.Config) Service {
 	return Service{
 		Config: c,
 	}
@@ -32,6 +32,8 @@ func (s Service) Send(to string, subject string, message string) {
 
 	// RFC #822 Standard
 	writer := multipart.NewWriter(bytes.NewBufferString(""))
+	defer writer.Close()
+
 	var b bytes.Buffer
 	_, _ = fmt.Fprintf(&b, "From: %s\r\nTo: %s\r\nSubject: %s\r\n", s.Config.SMTPSender, to, subject)
 	_, _ = fmt.Fprintf(&b, "MIME-Version: 1.0\r\n")

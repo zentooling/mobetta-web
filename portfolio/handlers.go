@@ -12,7 +12,6 @@ import (
 	"github.com/go-echarts/go-echarts/v2/charts"
 	"github.com/go-echarts/go-echarts/v2/opts"
 	"github.com/go-echarts/go-echarts/v2/types"
-	"github.com/zentooling/golang-web-server/models"
 	"github.com/zentooling/golang-web-server/routes"
 	"gorm.io/gorm"
 )
@@ -23,7 +22,7 @@ type Service struct {
 
 type PortfolioData struct {
 	routes.PageData
-	Holdings *[]models.Portfolio
+	Holdings *[]Portfolio
 	Script   template.HTML
 	// Script  string
 	Element template.HTML

@@ -11,8 +11,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
+	"github.com/zentooling/golang-web-server/config"
 	email2 "github.com/zentooling/golang-web-server/email"
-	"github.com/zentooling/golang-web-server/infra"
 	"github.com/zentooling/golang-web-server/models"
 	"github.com/zentooling/golang-web-server/routes"
 	"github.com/zentooling/golang-web-server/ulid"
@@ -133,7 +133,7 @@ func (svc Service) activationEmailHandler(userID uint, email string, trans func(
 }
 
 func (svc Service) sendActivationEmail(token string, email string, trans func(string) string) {
-	cfg := infra.LoadEnvVariables()
+	cfg := config.Initialize()
 	u, err := url.Parse(cfg.BaseURL)
 	if err != nil {
 		slog.Error("activationEmailHandler:sendActivationEmail", "error", err)

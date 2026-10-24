@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 
-	// "github.com/zentooling/golang-web-server/infra"
+	// "github.com/zentooling/golang-web-server/database"
 
 	"github.com/zentooling/golang-web-server/middleware"
 )

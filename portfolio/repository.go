@@ -3,7 +3,6 @@ package portfolio
 import (
 	"context"
 
-	"github.com/zentooling/golang-web-server/models"
 	"gorm.io/gorm"
 )
 
@@ -11,7 +10,7 @@ import (
 type HoldingsRepository interface {
 	//Create(ctx context.Context, user *models.Portfolio) error
 	//GetByID(ctx context.Context, id uint) (*models.Portfolio, error)
-	GetAll(ctx context.Context) (*[]models.Portfolio, error)
+	GetAll(ctx context.Context) (*[]Portfolio, error)
 	//Update(ctx context.Context, user *models.Portfolio) error
 	//Delete(ctx context.Context, id uint) error
 }
@@ -29,12 +28,12 @@ func NewHoldingsRepository(db *gorm.DB) HoldingsRepository {
 // // Create inserts a new user into the database
 //
 //	func (r *gormUserRepository) Create(ctx context.Context, user *User) error {
-//		return r.db.WithContext(ctx).Create(user).Error
+//		return r.database.WithContext(ctx).Create(user).Error
 //	}
 //
 // GetByID finds a single user by their primary key
-func (r *gormHoldingsRepository) GetAll(ctx context.Context) (*[]models.Portfolio, error) {
-	var holdings []models.Portfolio
+func (r *gormHoldingsRepository) GetAll(ctx context.Context) (*[]Portfolio, error) {
+	var holdings []Portfolio
 	// 1. Create a slice to hold all the users
 
 	// 2. Find all records and save them into the slice
@@ -52,7 +51,7 @@ func (r *gormHoldingsRepository) GetAll(ctx context.Context) (*[]models.Portfoli
 //// GetByID finds a single user by their primary key
 //func (r *gormUserRepository) GetByID(ctx context.Context, id uint) (*User, error) {
 //	var user User
-//	err := r.db.WithContext(ctx).First(&user, id).Error
+//	err := r.database.WithContext(ctx).First(&user, id).Error
 //	if err != nil {
 //		return nil, err
 //	}
@@ -61,11 +60,11 @@ func (r *gormHoldingsRepository) GetAll(ctx context.Context) (*[]models.Portfoli
 //
 //// Update saves changes made to an existing user
 //func (r *gormUserRepository) Update(ctx context.Context, user *User) error {
-//	return r.db.WithContext(ctx).Save(user).Error
+//	return r.database.WithContext(ctx).Save(user).Error
 //}
 //
 //// Delete marks a user record as deleted (soft delete)
 //func (r *gormUserRepository) Delete(ctx context.Context, id uint) error {
-//	return r.db.WithContext(ctx).Delete(&User{}, id).Error
+//	return r.database.WithContext(ctx).Delete(&User{}, id).Error
 //}
 //

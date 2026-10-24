@@ -4,25 +4,21 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879bed11-4273-4112-873f-3a70f3ce8ba3" name="Changes" comment="added responsive performance chart which looks pretty decent">
+    <list default="true" id="879bed11-4273-4112-873f-3a70f3ce8ba3" name="Changes" comment="more refactoring - remove Lair and rearrange infra packages">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/admin.go" beforeDir="false" afterPath="$PROJECT_DIR$/admin/admin.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/admin/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/infra/database.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/env.go" beforeDir="false" afterPath="$PROJECT_DIR$/infra/env.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/lang.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/lang.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/messages.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/messages.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login/activate.go" beforeDir="false" afterPath="$PROJECT_DIR$/login/activate.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/load/portfolio.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/load/portfolio.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email/email.go" beforeDir="false" afterPath="$PROJECT_DIR$/email/email.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/db/database.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/env.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/env.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/logging.go" beforeDir="false" afterPath="$PROJECT_DIR$/logging/logging.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/model.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/login/forgotpassword.go" beforeDir="false" afterPath="$PROJECT_DIR$/login/forgotpassword.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login/login.go" beforeDir="false" afterPath="$PROJECT_DIR$/login/login.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/login/register.go" beforeDir="false" afterPath="$PROJECT_DIR$/login/register.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login/resendactivation.go" beforeDir="false" afterPath="$PROJECT_DIR$/login/resendactivation.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login/resetpassword.go" beforeDir="false" afterPath="$PROJECT_DIR$/login/resetpassword.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portfolio/portfolio.go" beforeDir="false" afterPath="$PROJECT_DIR$/portfolio/portfolio.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/index.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/noroute.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/noroute.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/portfolio.go" beforeDir="false" afterPath="$PROJECT_DIR$/portfolio/model.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/portfolio.go" beforeDir="false" afterPath="$PROJECT_DIR$/portfolio/handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/portfolio/repository.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/search.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/search.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run.go" beforeDir="false" afterPath="$PROJECT_DIR$/run.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,8 +37,23 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "zentooling"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/zentooling/mobetta-web",
+    "accountId": "24438873-a4a2-46f0-9ae5-2b2377f84ab1"
+  }
+}]]></component>
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -82,7 +93,11 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/routes/" />
+      <recent name="$PROJECT_DIR$/config/" />
+      <recent name="$PROJECT_DIR$/logging/" />
+      <recent name="$PROJECT_DIR$/models/" />
+      <recent name="$PROJECT_DIR$/login/" />
+      <recent name="$PROJECT_DIR$/portfolio/" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -97,13 +112,22 @@
           <value>
             <map>
               <entry key="go build github.com/zentooling/golang-web-server/cmd/base" value="STOPPED" />
+              <entry key="go build github.com/zentooling/golang-web-server/cmd/load" value="STOPPED" />
             </map>
           </value>
         </entry>
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Go Build.go build github.com/zentooling/golang-web-server/cmd/base">
+  <component name="RunManager" selected="Go Build.go build github.com/zentooling/golang-web-server/cmd/load">
+    <configuration name="go build github.com/zentooling/golang-web-server" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="mobetta-web" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/zentooling/golang-web-server" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build github.com/zentooling/golang-web-server" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="mobetta-web" />
       <working_directory value="$PROJECT_DIR$" />
@@ -119,6 +143,27 @@
       <package value="github.com/zentooling/golang-web-server/cmd/base" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build github.com/zentooling/golang-web-server/cmd/base" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
+      <module name="mobetta-web" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/zentooling/golang-web-server/cmd/base" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build github.com/zentooling/golang-web-server/cmd/load" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
+      <module name="mobetta-web" />
+      <working_directory value="$PROJECT_DIR$" />
+      <envs>
+        <env name="PORTFOLIO_XLS_LOC" value="$PROJECT_DIR$/../mobetta/portfolio.xlsx" />
+      </envs>
+      <kind value="PACKAGE" />
+      <package value="github.com/zentooling/golang-web-server/cmd/load" />
+      <directory value="$PROJECT_DIR$" />
+      <auto_managed_config_id value="$PROJECT_DIR$/cmd/load" />
       <method v="2" />
     </configuration>
     <configuration name="go build github.com/zentooling/golang-web-server/cmd/load" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
@@ -171,7 +216,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added responsive performance chart which looks pretty decent" />
-    <option name="LAST_COMMIT_MESSAGE" value="added responsive performance chart which looks pretty decent" />
+    <MESSAGE value="refactor to remove dependencies" />
+    <MESSAGE value="more refactoring - remove Lair and rearrange infra packages" />
+    <option name="LAST_COMMIT_MESSAGE" value="more refactoring - remove Lair and rearrange infra packages" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/mobetta_web$go_build_github_com_zentooling_golang_web_server_cmd_load.out" NAME="go build github.com/zentooling/golang-web-server/cmd/load Coverage Results" MODIFIED="1789589409194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
