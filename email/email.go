@@ -32,7 +32,12 @@ func (s Service) Send(to string, subject string, message string) {
 
 	// RFC #822 Standard
 	writer := multipart.NewWriter(bytes.NewBufferString(""))
-	defer writer.Close()
+	defer func() {
+		err := writer.Close()
+		if err != nil {
+			slog.Error("Email.Send() unable to close writer ", err.Error())
+		}
+	}()
 
 	var b bytes.Buffer
 	_, _ = fmt.Fprintf(&b, "From: %s\r\nTo: %s\r\nSubject: %s\r\n", s.Config.SMTPSender, to, subject)

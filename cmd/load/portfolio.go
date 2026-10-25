@@ -32,7 +32,7 @@ func main() {
 		}
 	}(xl)
 
-	records := make([]*portfolio.Portfolio, 0)
+	records := make([]*portfolio.Holding, 0)
 
 	// Iterate on the rows of data
 	for row := range xl.ReadRows(xl.Sheets[0]) {
@@ -65,7 +65,7 @@ func main() {
 	insertRecords(db, records)
 }
 
-func insertRecords(db *gorm.DB, records []*portfolio.Portfolio) {
+func insertRecords(db *gorm.DB, records []*portfolio.Holding) {
 	slog.Info("insert portfolio records", "num_inserts", len(records))
 	result := db.Create(records) // pass a slice to insert multiple row
 
@@ -76,11 +76,11 @@ func insertRecords(db *gorm.DB, records []*portfolio.Portfolio) {
 
 func deletePortfolioRecords(db *gorm.DB) {
 	slog.Info("in delete portfolio records")
-	db.Where("1 = 1").Delete(&portfolio.Portfolio{})
+	db.Where("1 = 1").Delete(&portfolio.Holding{})
 	// SQL: DELETE FROM portfolio WHERE 1 = 1;
 }
 
-func XlsToRecord(row xlsxreader.Row) *portfolio.Portfolio {
+func XlsToRecord(row xlsxreader.Row) *portfolio.Holding {
 	ticker := row.Cells[1].Value
 
 	rank, err := strconv.ParseFloat(row.Cells[2].Value, 32)
@@ -113,7 +113,7 @@ func XlsToRecord(row xlsxreader.Row) *portfolio.Portfolio {
 		slog.Error("XlsToRecord", "Error during conversion", err.Error())
 	}
 
-	return &portfolio.Portfolio{
+	return &portfolio.Holding{
 		Ticker:       ticker,
 		Rank:         rank,
 		Close:        clsPrice,

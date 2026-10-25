@@ -6,19 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="879bed11-4273-4112-873f-3a70f3ce8ba3" name="Changes" comment="more refactoring - remove Lair and rearrange infra packages">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/admin/config.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/load/portfolio.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/load/portfolio.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/email/email.go" beforeDir="false" afterPath="$PROJECT_DIR$/email/email.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/db/database.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/env.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/env.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/logging.go" beforeDir="false" afterPath="$PROJECT_DIR$/logging/logging.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/model.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login/forgotpassword.go" beforeDir="false" afterPath="$PROJECT_DIR$/login/forgotpassword.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login/register.go" beforeDir="false" afterPath="$PROJECT_DIR$/login/register.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/portfolio.go" beforeDir="false" afterPath="$PROJECT_DIR$/portfolio/model.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portfolio/portfolio.go" beforeDir="false" afterPath="$PROJECT_DIR$/portfolio/handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/database/database.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/login.go" beforeDir="false" afterPath="$PROJECT_DIR$/login/login.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/portfolio/handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/model.go" beforeDir="false" afterPath="$PROJECT_DIR$/portfolio/model.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/portfolio/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/portfolio/repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routes.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run.go" beforeDir="false" afterPath="$PROJECT_DIR$/run.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -111,7 +106,7 @@
         <entry key="GoApplicationRunConfiguration">
           <value>
             <map>
-              <entry key="go build github.com/zentooling/golang-web-server/cmd/base" value="STOPPED" />
+              <entry key="go build github.com/zentooling/golang-web-server/cmd/base" value="FAILED" />
               <entry key="go build github.com/zentooling/golang-web-server/cmd/load" value="STOPPED" />
             </map>
           </value>

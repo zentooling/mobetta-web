@@ -10,9 +10,14 @@ import (
 type HoldingsRepository interface {
 	//Create(ctx context.Context, user *models.Portfolio) error
 	//GetByID(ctx context.Context, id uint) (*models.Portfolio, error)
-	GetAll(ctx context.Context) (*[]Portfolio, error)
+	GetAll(ctx context.Context) (*[]Holding, error)
 	//Update(ctx context.Context, user *models.Portfolio) error
 	//Delete(ctx context.Context, id uint) error
+}
+
+type MetricRepository interface {
+	GetAllByTicker(ctx context.Context) (*[]Metric, error)
+	GetUniqueTickers(ctx context.Context) (*[]Metric, error)
 }
 
 // gormHoldingsRepository implements the UserRepository interface
@@ -32,8 +37,8 @@ func NewHoldingsRepository(db *gorm.DB) HoldingsRepository {
 //	}
 //
 // GetByID finds a single user by their primary key
-func (r *gormHoldingsRepository) GetAll(ctx context.Context) (*[]Portfolio, error) {
-	var holdings []Portfolio
+func (r *gormHoldingsRepository) GetAll(ctx context.Context) (*[]Holding, error) {
+	var holdings []Holding
 	// 1. Create a slice to hold all the users
 
 	// 2. Find all records and save them into the slice

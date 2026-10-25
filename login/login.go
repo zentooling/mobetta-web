@@ -45,12 +45,12 @@ func (svc Service) LoginPost(c *gin.Context) {
 
 	// load user and associated roles
 
-	//res := db.Model(&models.User{}).Preload("Roles").Find(&user)
+	//res := database.Model(&models.User{}).Preload("Roles").Find(&user)
 
 	user := models.User{Email: email}
 	res := db.Preload("Roles").Where(&user).First(&user)
 
-	//res := db.Where(&user).First(&user)
+	//res := database.Where(&user).First(&user)
 	if res.Error != nil {
 		pd.AddMessage(routes.Error, loginError)
 		slog.Error("LoginPost", "error", res.Error)

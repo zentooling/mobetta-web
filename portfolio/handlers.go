@@ -22,7 +22,7 @@ type Service struct {
 
 type PortfolioData struct {
 	routes.PageData
-	Holdings *[]Portfolio
+	Holdings *[]Holding
 	Script   template.HTML
 	// Script  string
 	Element template.HTML

@@ -1,8 +1,10 @@
 package portfolio
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+)
 
-type Portfolio struct {
+type Holding struct {
 	gorm.Model
 	Ticker       string
 	Rank         float64
@@ -13,4 +15,17 @@ type Portfolio struct {
 	PctAlloc     float64
 	Cost         float64
 	NumShares    float64
+}
+
+type Instrument struct {
+	gorm.Model
+	Ticker      string
+	Description string
+	Metrics     []Metric
+}
+type Metric struct {
+	gorm.Model
+	InstrumentID uint // automagic foreign key from instrument
+	Date         string
+	Value        float64
 }

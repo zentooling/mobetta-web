@@ -1,23 +1,24 @@
-package infra
+package database
 
 import (
 	"fmt"
 	"log/slog"
 	"time"
 
+	"github.com/zentooling/golang-web-server/config"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
 
-func ConnectToDatabase(c *Config) (*gorm.DB, error) {
+func Initialize(c *config.Config) (*gorm.DB, error) {
 	db, err := connectLoop(c, 0)
 	// side effect set global for easy access
 	return db, err
 }
 
-func connectLoop(c *Config, count int) (*gorm.DB, error) {
+func connectLoop(c *config.Config, count int) (*gorm.DB, error) {
 	db, err := attemptConnection(c)
 	if err != nil {
 		if count > 300 {
@@ -29,18 +30,18 @@ func connectLoop(c *Config, count int) (*gorm.DB, error) {
 	return db, err
 }
 
-func attemptConnection(c *Config) (*gorm.DB, error) {
+func attemptConnection(c *config.Config) (*gorm.DB, error) {
 	var db *gorm.DB
 	var err error
 	switch c.Database {
 	case "sqlite":
 		// In-memory sqlite if no database name is specified
 		// dsn := "file::memory:?cache=shared"
-		dsn := "/tmp/test.db"
+		dsn := "/tmp/test.database"
 		if c.DatabaseName != "" {
-			dsn = fmt.Sprintf("%s.db", c.DatabaseName)
+			dsn = fmt.Sprintf("%s.database", c.DatabaseName)
 		}
-		slog.Info("db init", "dsn", dsn)
+		slog.Info("database init", "dsn", dsn)
 
 		db, err = gorm.Open(sqlite.Open(dsn), &gorm.Config{})
 

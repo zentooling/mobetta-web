@@ -176,13 +176,17 @@ func Run() {
 }
 
 func MigrateDatabase(db *gorm.DB) error {
-	err := db.AutoMigrate(&models.User{},
+	err := db.AutoMigrate(
+		&models.User{},
 		&models.Role{},
 		&models.Token{},
 		&models.Session{},
 		&models.Website{},
 		// user defined tables
-		&portfolio.Portfolio{})
+		&portfolio.Holding{},
+		&portfolio.Instrument{},
+		&portfolio.Metric{},
+	)
 	seed(db)
 	return err
 }
@@ -277,4 +281,42 @@ func seed(db *gorm.DB) {
 			db.Save(&website)
 		}
 	}
+
+	// create test data for performance benchmarks
+	instruments := []portfolio.Instrument{
+		{
+			Ticker:      "SPX",
+			Description: "S&P 500 Index",
+			Metrics: []portfolio.Metric{
+				{Date: "1/10/2026", Value: 125},
+				{Date: "1/11/2026", Value: 130},
+				{Date: "1/12/2026", Value: 133},
+				{Date: "1/13/2026", Value: 123},
+				{Date: "1/14/2026", Value: 92},
+				{Date: "1/15/2026", Value: 140},
+				{Date: "1/16/2026", Value: 145},
+			},
+		},
+		{
+			Ticker:      "Mobetta",
+			Description: "Mobetta",
+			Metrics: []portfolio.Metric{
+				{Date: "1/10/2026", Value: 225},
+				{Date: "1/11/2026", Value: 240},
+				{Date: "1/12/2026", Value: 230},
+				{Date: "1/13/2026", Value: 250},
+				{Date: "1/14/2026", Value: 265},
+				{Date: "1/15/2026", Value: 255},
+				{Date: "1/16/2026", Value: 265},
+			},
+		},
+	}
+
+	for _, instrument := range instruments {
+		res := db.Where(&instrument).First(&instrument)
+		if res.Error != nil && errors.Is(res.Error, gorm.ErrRecordNotFound) {
+			db.Save(&instrument)
+		}
+	}
+
 }
