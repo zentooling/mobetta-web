@@ -13,7 +13,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/zentooling/golang-web-server/config"
 	email2 "github.com/zentooling/golang-web-server/email"
-	"github.com/zentooling/golang-web-server/models"
+	"github.com/zentooling/golang-web-server/middleware"
 	"github.com/zentooling/golang-web-server/routes"
 	"github.com/zentooling/golang-web-server/ulid"
 	"golang.org/x/crypto/bcrypt"
@@ -63,8 +63,8 @@ func (svc Service) RegisterPost(c *gin.Context) {
 		return
 	}
 
-	user := models.User{Email: email}
-	role := models.Role{}
+	user := User{Email: email}
+	role := Role{}
 
 	db := svc.db
 
@@ -106,9 +106,9 @@ func (svc Service) RegisterPost(c *gin.Context) {
 }
 
 func (svc Service) activationEmailHandler(userID uint, email string, trans func(string) string) {
-	activationToken := models.Token{
+	activationToken := middleware.Token{
 		Value: ulid.Generate(),
-		Type:  models.TokenUserActivation,
+		Type:  middleware.TokenUserActivation,
 	}
 
 	db := svc.db

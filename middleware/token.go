@@ -1,19 +1,8 @@
-package models
+package middleware
 
 import (
-	"gorm.io/gorm"
 	"time"
 )
-
-// Token holds tokens typically used for user activation and password resets
-type Token struct {
-	gorm.Model
-	Value     string
-	Type      string
-	ModelID   int
-	ModelType string
-	ExpiresAt time.Time
-}
 
 // HasExpired is a helper function that checks if the current time is after the token expiration time
 func (t Token) HasExpired() bool {

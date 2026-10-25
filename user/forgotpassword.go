@@ -11,7 +11,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/zentooling/golang-web-server/config"
 	email2 "github.com/zentooling/golang-web-server/email"
-	"github.com/zentooling/golang-web-server/models"
+	"github.com/zentooling/golang-web-server/middleware"
 	"github.com/zentooling/golang-web-server/routes"
 	"github.com/zentooling/golang-web-server/ulid"
 	"gorm.io/gorm"
@@ -32,7 +32,7 @@ func (svc Service) ForgotPasswordPost(c *gin.Context) {
 	db := svc.db
 
 	email := c.PostForm("email")
-	user := models.User{Email: email}
+	user := User{Email: email}
 	res := db.Where(&user).First(&user)
 	if res.Error == nil && user.ActivatedAt != nil {
 		go svc.forgotPasswordEmailHandler(user.ID, email, pd.Trans)
@@ -44,9 +44,9 @@ func (svc Service) ForgotPasswordPost(c *gin.Context) {
 }
 
 func (svc Service) forgotPasswordEmailHandler(userID uint, email string, trans func(string) string) {
-	forgotPasswordToken := models.Token{
+	forgotPasswordToken := middleware.Token{
 		Value: ulid.Generate(),
-		Type:  models.TokenPasswordReset,
+		Type:  middleware.TokenPasswordReset,
 	}
 
 	db := svc.db

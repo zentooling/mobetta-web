@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/zentooling/golang-web-server/models"
 	"github.com/zentooling/golang-web-server/routes"
+	"github.com/zentooling/golang-web-server/user"
 	"gorm.io/gorm"
 )
 
@@ -67,7 +67,7 @@ func (svc Service) Admin(c *gin.Context) {
 
 	var msu []MonthlySignUps
 
-	res := db.Model(&models.User{}).
+	res := db.Model(&login.User{}).
 		Select("strftime('%Y',created_at) as year, strftime('%m',created_at) AS month, COUNT(*) AS count").
 		// Where("created_at >= CURDATE() - INTERVAL 1 YEAR").
 		Where("created_at >= DATETIME('now','-1 years')").

@@ -1,4 +1,4 @@
-package routes
+package login
 
 import (
 	"fmt"
@@ -8,13 +8,14 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/zentooling/golang-web-server/models"
+	"github.com/zentooling/golang-web-server/middleware"
+	"github.com/zentooling/golang-web-server/routes"
 )
 
 // SearchData holds additional data needed to render the search HTML page
 type SearchData struct {
-	PageData
-	Results []models.Website
+	routes.PageData
+	Results []middleware.Website
 	Prev    bool
 	Next    bool
 	PrevURL string
@@ -23,7 +24,7 @@ type SearchData struct {
 
 // Search renders the search HTML page and any search results
 func (svc Service) Search(c *gin.Context) {
-	pdS := DefaultPageData(c)
+	pdS := routes.DefaultPageData(c)
 	page := 1
 	resultsPerPage := 5
 	pdS.Title = pdS.Trans("Search")
@@ -42,7 +43,7 @@ func (svc Service) Search(c *gin.Context) {
 		}
 	}
 
-	var results []models.Website
+	var results []middleware.Website
 
 	slog.Info("Search", "search", search)
 	searchFilter := fmt.Sprintf("%s%s%s", "%", search, "%")
@@ -56,7 +57,7 @@ func (svc Service) Search(c *gin.Context) {
 		Find(&results)
 
 	if res.Error != nil || len(results) == 0 {
-		pd.AddMessage(Error, pdS.Trans("No results found."))
+		pd.AddMessage(routes.Error, pdS.Trans("No results found."))
 		slog.Error("Search", "error", res.Error)
 		c.HTML(http.StatusOK, "search.gohtml", pd)
 		return

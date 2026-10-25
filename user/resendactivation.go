@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/zentooling/golang-web-server/models"
+	"github.com/zentooling/golang-web-server/middleware"
 	"github.com/zentooling/golang-web-server/routes"
 )
 
@@ -22,11 +22,11 @@ func (svc Service) ResendActivationPost(c *gin.Context) {
 	db := svc.db
 	pd.Title = pd.Trans("Resend Activation Email")
 	email := c.PostForm("email")
-	user := models.User{Email: email}
+	user := User{Email: email}
 	res := db.Where(&user).First(&user)
 	if res.Error == nil && user.ActivatedAt == nil {
-		activationToken := models.Token{
-			Type:    models.TokenUserActivation,
+		activationToken := middleware.Token{
+			Type:    middleware.TokenUserActivation,
 			ModelID: int(user.ID),
 		}
 

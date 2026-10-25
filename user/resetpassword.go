@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/zentooling/golang-web-server/models"
+	"github.com/zentooling/golang-web-server/middleware"
 	"github.com/zentooling/golang-web-server/routes"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -48,9 +48,9 @@ func (svc Service) ResetPasswordPost(c *gin.Context) {
 		return
 	}
 
-	forgotPasswordToken := models.Token{
+	forgotPasswordToken := middleware.Token{
 		Value: token,
-		Type:  models.TokenPasswordReset,
+		Type:  middleware.TokenPasswordReset,
 	}
 
 	db := svc.db
@@ -68,7 +68,7 @@ func (svc Service) ResetPasswordPost(c *gin.Context) {
 		return
 	}
 
-	user := models.User{}
+	user := User{}
 	user.ID = uint(forgotPasswordToken.ModelID)
 	res = db.Where(&user).First(&user)
 	if res.Error != nil {

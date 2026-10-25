@@ -6,7 +6,6 @@ import (
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"github.com/zentooling/golang-web-server/models"
 	"gorm.io/gorm"
 )
 
@@ -14,13 +13,13 @@ import (
 const SessionIDKey = "SessionID"
 
 // Session middleware checks for an active session and sets the UserIDKey to the context of the current request if found
-func Session(db *gorm.DB) gin.HandlerFunc {
+func SessionHandler(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		session := DefaultSessionWithOptions(c)
 		sessionIdentifierInterface := session.Get(SessionIDKey)
 
 		if sessionIdentifier, ok := sessionIdentifierInterface.(string); ok {
-			ses := models.Session{
+			ses := Session{
 				Identifier: sessionIdentifier,
 			}
 			res := db.Where(&ses).First(&ses)

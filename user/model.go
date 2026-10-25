@@ -1,9 +1,10 @@
 // Package models defines all the database models for the application
-package models
+package login
 
 import (
 	"time"
 
+	"github.com/zentooling/golang-web-server/middleware"
 	"gorm.io/gorm"
 )
 
@@ -13,9 +14,9 @@ type User struct {
 	Email       string
 	Password    string
 	ActivatedAt *time.Time
-	Roles       []Role  `gorm:"many2many:user_roles;"` // Many-to-many relationship with Role
-	Tokens      []Token `gorm:"polymorphic:Model;"`
-	Sessions    []Session
+	Roles       []Role             `gorm:"many2many:user_roles;"` // Many-to-many relationship with Role
+	Tokens      []middleware.Token `gorm:"polymorphic:Model;"`
+	Sessions    []middleware.Session
 }
 
 // Role represents a user role (user,admin,etc)

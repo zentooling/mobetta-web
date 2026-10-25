@@ -95,6 +95,8 @@ func percentChangeZeroStartSeries(series []float64) ([]float64, error) {
 // percentChangeSeries calculates the percentage change between each consecutive pair
 // in a slice of stock values.
 // Formula: ((current - previous) / previous) * 100
+//
+//goland:noinspection GoUnusedFunction
 func percentChangeSeries(prices []float64) ([]float64, error) {
 
 	sz := len(prices)

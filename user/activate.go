@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/zentooling/golang-web-server/models"
+	"github.com/zentooling/golang-web-server/middleware"
 	"github.com/zentooling/golang-web-server/routes"
 )
 
@@ -18,9 +18,9 @@ func (svc Service) Activate(c *gin.Context) {
 	activationSuccess := pd.Trans("Account activated. You may now proceed to login to your account.")
 	pd.Title = pd.Trans("Activate")
 	token := c.Param("token")
-	activationToken := models.Token{
+	activationToken := middleware.Token{
 		Value: token,
-		Type:  models.TokenUserActivation,
+		Type:  middleware.TokenUserActivation,
 	}
 
 	db := svc.db
@@ -40,7 +40,7 @@ func (svc Service) Activate(c *gin.Context) {
 		return
 	}
 
-	user := models.User{}
+	user := User{}
 	user.ID = uint(activationToken.ModelID)
 
 	res = db.Where(&user).First(&user)

@@ -8,7 +8,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/zentooling/golang-web-server/middleware"
-	"github.com/zentooling/golang-web-server/models"
 	"github.com/zentooling/golang-web-server/routes"
 	"github.com/zentooling/golang-web-server/ulid"
 	"golang.org/x/crypto/bcrypt"
@@ -47,7 +46,7 @@ func (svc Service) LoginPost(c *gin.Context) {
 
 	//res := database.Model(&models.User{}).Preload("Roles").Find(&user)
 
-	user := models.User{Email: email}
+	user := User{Email: email}
 	res := db.Preload("Roles").Where(&user).First(&user)
 
 	//res := database.Where(&user).First(&user)
@@ -88,7 +87,7 @@ func (svc Service) LoginPost(c *gin.Context) {
 	// Generate a ulid for the current session
 	sessionIdentifier := ulid.Generate()
 
-	ses := models.Session{
+	ses := middleware.Session{
 		Identifier: sessionIdentifier,
 	}
 

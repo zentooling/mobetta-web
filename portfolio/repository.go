@@ -44,7 +44,7 @@ func (r *gormHoldingsRepository) GetAll(ctx context.Context) (*[]Holding, error)
 	// 2. Find all records and save them into the slice
 	result := r.db.Find(&holdings)
 
-	// This runs the SQL equivalent of: SELECT * FROM users;
+	// This runs the SQL equivalent of: SELECT * FROM holdings;
 
 	if result.Error != nil {
 		return nil, result.Error

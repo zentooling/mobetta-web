@@ -17,11 +17,10 @@ import (
 	"github.com/zentooling/golang-web-server/config"
 	"github.com/zentooling/golang-web-server/database"
 	"github.com/zentooling/golang-web-server/logging"
-	"github.com/zentooling/golang-web-server/login"
 	"github.com/zentooling/golang-web-server/middleware"
-	"github.com/zentooling/golang-web-server/models"
 	"github.com/zentooling/golang-web-server/portfolio"
 	"github.com/zentooling/golang-web-server/routes"
+	"github.com/zentooling/golang-web-server/user"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
@@ -101,7 +100,7 @@ func Run() {
 	assets.StaticFS("/", http.FS(subFS))
 
 	// Session middleware is applied to all groups after this point.
-	r.Use(middleware.Session(db))
+	r.Use(middleware.SessionHandler(db))
 
 	// A General middleware is defined to add default headers to improve site security
 	r.Use(middleware.General())
@@ -115,10 +114,10 @@ func Run() {
 	r.GET("/", routeSvc.Index)
 
 	// We want to handle both POST and GET requests on the /search route. We define both but use the same function to handle the requests.
-	r.GET("/search", routeSvc.Search)
-	r.POST("/search", routeSvc.Search)
-	r.Any("/search/:page", routeSvc.Search)
-	r.Any("/search/:page/:query", routeSvc.Search)
+	r.GET("/search", loginSvc.Search)
+	r.POST("/search", loginSvc.Search)
+	r.Any("/search/:page", loginSvc.Search)
+	r.Any("/search/:page/:query", loginSvc.Search)
 
 	// We define our 404 handler for when a page can not be found
 	r.NoRoute(routeSvc.NoRoute)
@@ -177,11 +176,11 @@ func Run() {
 
 func MigrateDatabase(db *gorm.DB) error {
 	err := db.AutoMigrate(
-		&models.User{},
-		&models.Role{},
-		&models.Token{},
-		&models.Session{},
-		&models.Website{},
+		&login.User{},
+		&login.Role{},
+		&middleware.Token{},
+		&middleware.Session{},
+		&middleware.Website{},
 		// user defined tables
 		&portfolio.Holding{},
 		&portfolio.Instrument{},
@@ -193,7 +192,7 @@ func MigrateDatabase(db *gorm.DB) error {
 
 func seed(db *gorm.DB) {
 
-	roles := []models.Role{
+	roles := []login.Role{
 		{
 			Name:        "admin",
 			Description: "Administrative privileges",
@@ -213,7 +212,7 @@ func seed(db *gorm.DB) {
 	}
 
 	// create admin account
-	adminRole := models.Role{}
+	adminRole := login.Role{}
 	res := db.Where("name='admin'").First(&adminRole)
 	if res.Error != nil && errors.Is(res.Error, gorm.ErrRecordNotFound) {
 		slog.Error("unable to find admin role")
@@ -223,7 +222,7 @@ func seed(db *gorm.DB) {
 
 	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte("password"), bcrypt.DefaultCost)
 	userName := "admin@admin.org"
-	adminUser := models.User{
+	adminUser := login.User{
 		Email:       userName,
 		Password:    string(hashedPassword),
 		ActivatedAt: &tm,
@@ -231,12 +230,12 @@ func seed(db *gorm.DB) {
 	adminUser.Roles = append(adminUser.Roles, adminRole)
 
 	// hard delete (w/ Unscoped) previous admin users
-	db.Unscoped().Where(&models.User{Email: userName}).Delete(&models.User{})
+	db.Unscoped().Where(&login.User{Email: userName}).Delete(&login.User{})
 
 	// save new one
 	db.Save(&adminUser)
 	// We seed some websites for our search results
-	websites := []models.Website{
+	websites := []middleware.Website{
 		{
 			Title:       "A Tour of Go",
 			Description: "A Tour of Go has several interactive examples of how Go which you can learn from. There is a menu available if you would like to skip to different sections.",
