@@ -1,4 +1,4 @@
-// Package models defines all the database models for the application
+// Package login defines all the database models for the application
 package login
 
 import (

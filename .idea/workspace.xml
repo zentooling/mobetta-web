@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="879bed11-4273-4112-873f-3a70f3ce8ba3" name="Changes" comment="reorg based on domain function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/model.go" beforeDir="false" afterPath="$PROJECT_DIR$/user/model.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/templates/header.gohtml" beforeDir="false" afterPath="$PROJECT_DIR$/web/templates/header.gohtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,22 +21,81 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file:///opt/homebrew/opt/go/libexec" />
+  <component name="GOROOT" url="file:///usr/lib/golang" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "zentooling"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;zentooling&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/zentooling/mobetta-web",
-    "accountId": "24438873-a4a2-46f0-9ae5-2b2377f84ab1"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/zentooling/mobetta-web&quot;,
+    &quot;accountId&quot;: &quot;24438873-a4a2-46f0-9ae5-2b2377f84ab1&quot;
   }
-}]]></component>
+}</component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="3.5090545809945387E-15" />
+      <entry key="MS500" value="0.002085430173372625" />
+      <entry key="S2" value="0.35797300840596286" />
+      <entry key="S5" value="1.0046602830332927" />
+      <entry key="S10" value="1.4174294618191134" />
+      <entry key="S30" value="1.7831258742948886" />
+      <entry key="S60" value="1.8884494121098931" />
+      <entry key="M2" value="1.9434237897469309" />
+      <entry key="M5" value="1.9771743362247314" />
+      <entry key="M10" value="1.9885543883145367" />
+      <entry key="M15" value="1.9923622891870498" />
+      <entry key="M30" value="1.9961774884152523" />
+      <entry key="H1" value="1.9980878292869548" />
+      <entry key="H2" value="1.9990436858037048" />
+      <entry key="H4" value="1.9995217856782028" />
+      <entry key="D1" value="1.999920289664141" />
+      <entry key="W1" value="1.999988612614481" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0" />
+      <entry key="S60" value="1.0" />
+      <entry key="M2" value="1.0" />
+      <entry key="M5" value="1.0" />
+      <entry key="M10" value="1.0" />
+      <entry key="M15" value="1.0" />
+      <entry key="M30" value="1.0" />
+      <entry key="H1" value="1.0" />
+      <entry key="H2" value="1.0" />
+      <entry key="H4" value="1.0" />
+      <entry key="D1" value="1.0" />
+      <entry key="W1" value="1.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="3.509054602494681E-15" />
+      <entry key="MS500" value="0.002114704591076643" />
+      <entry key="S2" value="0.43152967948213583" />
+      <entry key="S5" value="1.3567463397613126" />
+      <entry key="S10" value="2.0107978606473793" />
+      <entry key="S30" value="2.6234396265281705" />
+      <entry key="S60" value="2.8051357009968174" />
+      <entry key="M2" value="2.900861144818752" />
+      <entry key="M5" value="2.959926813198236" />
+      <entry key="M10" value="2.9798931179995547" />
+      <entry key="M15" value="2.9865797414384234" />
+      <entry key="M30" value="2.9932820226800274" />
+      <entry key="H1" value="2.996639046934189" />
+      <entry key="H2" value="2.9983190320658024" />
+      <entry key="H4" value="2.9991593931450775" />
+      <entry key="D1" value="2.9998598817865756" />
+      <entry key="W1" value="2.9999799826942626" />
+    </decayedShown>
+  </component>
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
@@ -53,7 +114,7 @@
   &quot;keyToString&quot;: {
     &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
     &quot;Go Build.go build github.com/zentooling/golang-web-server.executor&quot;: &quot;Run&quot;,
-    &quot;Go Build.go build github.com/zentooling/golang-web-server/cmd/base.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build github.com/zentooling/golang-web-server/cmd/base.executor&quot;: &quot;Debug&quot;,
     &quot;Go Build.go build github.com/zentooling/golang-web-server/cmd/load.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.GoLinterPluginOnboardingV2&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.GoLinterPluginStorageMigration&quot;: &quot;true&quot;,
@@ -61,6 +122,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.analysis.ui.options.defaults&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.application.removed.from.services&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
@@ -68,7 +130,9 @@
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/jzendle/Projects/mobetta-web&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/jzendle/Projects/mobetta-web&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
@@ -85,25 +149,6 @@
       <recent name="$PROJECT_DIR$/login/" />
       <recent name="$PROJECT_DIR$/config/" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="configurationTypes">
-      <set>
-        <option value="GoApplicationRunConfiguration" />
-      </set>
-    </option>
-    <option name="configurationStatuses">
-      <map>
-        <entry key="GoApplicationRunConfiguration">
-          <value>
-            <map>
-              <entry key="go build github.com/zentooling/golang-web-server/cmd/base" value="STOPPED" />
-              <entry key="go build github.com/zentooling/golang-web-server/cmd/load" value="STOPPED" />
-            </map>
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="RunManager" selected="Go Build.go build github.com/zentooling/golang-web-server/cmd/load">
     <configuration name="go build github.com/zentooling/golang-web-server" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
@@ -178,8 +223,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-gosdk-63c95d513abe-08e7ff217c2b-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-262.10968.67" />
-        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-GO-262.10968.67" />
+        <option value="bundled-gosdk-63c95d513abe-57f1b89dcace-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-263.7307.211" />
+        <option value="bundled-js-predefined-d6986cc7102b-56aff7b04f6f-JavaScript-GO-263.7307.211" />
       </set>
     </attachedChunks>
   </component>
