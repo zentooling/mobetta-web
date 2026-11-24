@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879bed11-4273-4112-873f-3a70f3ce8ba3" name="Changes" comment="reorg based on domain function">
+    <list default="true" id="879bed11-4273-4112-873f-3a70f3ce8ba3" name="Changes" comment="mass edit changed url by accident">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/model.go" beforeDir="false" afterPath="$PROJECT_DIR$/user/model.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/templates/header.gohtml" beforeDir="false" afterPath="$PROJECT_DIR$/web/templates/header.gohtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,66 +32,66 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/zentooling/mobetta-web&quot;,
-    &quot;accountId&quot;: &quot;24438873-a4a2-46f0-9ae5-2b2377f84ab1&quot;
+    &quot;accountId&quot;: &quot;794809c5-84b2-4dbd-88e8-59f4bee8e6ef&quot;
   }
 }</component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="3.5090545809945387E-15" />
-      <entry key="MS500" value="0.002085430173372625" />
-      <entry key="S2" value="0.35797300840596286" />
-      <entry key="S5" value="1.0046602830332927" />
-      <entry key="S10" value="1.4174294618191134" />
-      <entry key="S30" value="1.7831258742948886" />
-      <entry key="S60" value="1.8884494121098931" />
-      <entry key="M2" value="1.9434237897469309" />
-      <entry key="M5" value="1.9771743362247314" />
-      <entry key="M10" value="1.9885543883145367" />
-      <entry key="M15" value="1.9923622891870498" />
-      <entry key="M30" value="1.9961774884152523" />
-      <entry key="H1" value="1.9980878292869548" />
-      <entry key="H2" value="1.9990436858037048" />
-      <entry key="H4" value="1.9995217856782028" />
-      <entry key="D1" value="1.999920289664141" />
-      <entry key="W1" value="1.999988612614481" />
+      <entry key="MS100" value="1.000000000005039" />
+      <entry key="MS500" value="1.0055013446363792" />
+      <entry key="S2" value="1.272651865870259" />
+      <entry key="S5" value="1.7034451748625408" />
+      <entry key="S10" value="2.820426812692956" />
+      <entry key="S30" value="7.1435730314547445" />
+      <entry key="S60" value="9.85860170674571" />
+      <entry key="M2" value="11.71003549828137" />
+      <entry key="M5" value="13.025025204332652" />
+      <entry key="M10" value="13.502095418297559" />
+      <entry key="M15" value="13.665703155548426" />
+      <entry key="M30" value="13.831659752744784" />
+      <entry key="H1" value="13.915529725237015" />
+      <entry key="H2" value="13.957689548666348" />
+      <entry key="H4" value="13.978825911210407" />
+      <entry key="D1" value="13.996468362378595" />
+      <entry key="W1" value="13.999495416068958" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0" />
-      <entry key="S60" value="1.0" />
-      <entry key="M2" value="1.0" />
-      <entry key="M5" value="1.0" />
-      <entry key="M10" value="1.0" />
-      <entry key="M15" value="1.0" />
-      <entry key="M30" value="1.0" />
-      <entry key="H1" value="1.0" />
-      <entry key="H2" value="1.0" />
-      <entry key="H4" value="1.0" />
-      <entry key="D1" value="1.0" />
-      <entry key="W1" value="1.0" />
+      <entry key="MS100" value="5.5754326671804236E-124" />
+      <entry key="MS500" value="2.234887750151315E-25" />
+      <entry key="S2" value="6.87565265398132E-7" />
+      <entry key="S5" value="0.003427090487429766" />
+      <entry key="S10" value="0.05854135706856961" />
+      <entry key="S30" value="0.3882882619524103" />
+      <entry key="S60" value="0.6231278054720479" />
+      <entry key="M2" value="0.7893844471941714" />
+      <entry key="M5" value="0.909736094838659" />
+      <entry key="M10" value="0.95380086749733" />
+      <entry key="M15" value="0.968958422417052" />
+      <entry key="M30" value="0.9843568572509935" />
+      <entry key="H1" value="0.9921475985210026" />
+      <entry key="H2" value="0.9960660613237469" />
+      <entry key="H4" value="0.9980310923632327" />
+      <entry key="D1" value="0.9996715791946916" />
+      <entry key="W1" value="0.9999530761370684" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="3.509054602494681E-15" />
-      <entry key="MS500" value="0.002114704591076643" />
-      <entry key="S2" value="0.43152967948213583" />
-      <entry key="S5" value="1.3567463397613126" />
-      <entry key="S10" value="2.0107978606473793" />
-      <entry key="S30" value="2.6234396265281705" />
-      <entry key="S60" value="2.8051357009968174" />
-      <entry key="M2" value="2.900861144818752" />
-      <entry key="M5" value="2.959926813198236" />
-      <entry key="M10" value="2.9798931179995547" />
-      <entry key="M15" value="2.9865797414384234" />
-      <entry key="M30" value="2.9932820226800274" />
-      <entry key="H1" value="2.996639046934189" />
-      <entry key="H2" value="2.9983190320658024" />
-      <entry key="H4" value="2.9991593931450775" />
-      <entry key="D1" value="2.9998598817865756" />
-      <entry key="W1" value="2.9999799826942626" />
+      <entry key="MS100" value="0.8526348917724356" />
+      <entry key="MS500" value="0.9739913994537399" />
+      <entry key="S2" value="1.2631114920835955" />
+      <entry key="S5" value="1.699874981760091" />
+      <entry key="S10" value="2.851662189231416" />
+      <entry key="S30" value="7.467284368625507" />
+      <entry key="S60" value="10.428092575229657" />
+      <entry key="M2" value="12.464813228360162" />
+      <entry key="M5" value="13.918625500677434" />
+      <entry key="M10" value="14.447405052760244" />
+      <entry key="M15" value="14.628903399990394" />
+      <entry key="M30" value="14.813087998726425" />
+      <entry key="H1" value="14.906200476954846" />
+      <entry key="H2" value="14.9530140310188" />
+      <entry key="H4" value="14.976485422648086" />
+      <entry key="D1" value="14.99607790128" />
+      <entry key="W1" value="14.999439626606872" />
     </decayedShown>
   </component>
   <component name="PackageJsonUpdateNotifier">
@@ -135,7 +133,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -223,8 +221,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-gosdk-63c95d513abe-57f1b89dcace-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-263.7307.211" />
-        <option value="bundled-js-predefined-d6986cc7102b-56aff7b04f6f-JavaScript-GO-263.7307.211" />
+        <option value="bundled-gosdk-63c95d513abe-57f1b89dcace-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-263.7307.354" />
+        <option value="bundled-js-predefined-d6986cc7102b-56aff7b04f6f-JavaScript-GO-263.7307.354" />
       </set>
     </attachedChunks>
   </component>
@@ -245,13 +243,25 @@
     <option featureType="dependencySupport" implementationName="javascript:npm:webpack" />
     <option featureType="dependencySupport" implementationName="javascript:npm:postcss" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added responsive performance chart which looks pretty decent" />
     <MESSAGE value="refactor to remove dependencies" />
     <MESSAGE value="more refactoring - remove Lair and rearrange infra packages" />
     <MESSAGE value="schema and test data for perf metrics chart" />
     <MESSAGE value="reorg based on domain function" />
-    <option name="LAST_COMMIT_MESSAGE" value="reorg based on domain function" />
+    <MESSAGE value="mass edit changed url by accident" />
+    <option name="LAST_COMMIT_MESSAGE" value="mass edit changed url by accident" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/mobetta_web$go_build_github_com_zentooling_golang_web_server_cmd_load.out" NAME="go build github.com/zentooling/golang-web-server/cmd/load Coverage Results" MODIFIED="1789589409194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
